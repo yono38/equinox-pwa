@@ -14,7 +14,14 @@ class App extends Component {
           <div className="App-welcome">
             <div className="App-welcome-text">
               <h1 className="no-margin">Jason</h1>
-              <p className="text-small no-margin color-grey">Welcome to Brookfield Place</p>
+              <p className="text-small no-margin color-lightgrey">Welcome to Brookfield Place</p>
+            </div>
+            <div className="App-checkin-wrapper">
+              <a href="#" className="App-checkin-button text-small">
+              <span className="icon-marker-dot" />
+              {' '}
+              Check In
+              </a>
             </div>
           </div>
           <div className="App-actions">
@@ -35,7 +42,7 @@ class App extends Component {
 
         <div className="App-up-next card">
           <div className="App-up-next-header card-header">
-            <h2 className="color-grey">Up Next</h2>
+            <h2 className="color-lightgrey">Up Next</h2>
             <a href="#" className="color-teal">
               View Calendar{' '}
               <span className="icon-horizontal-arrow" />
@@ -55,7 +62,7 @@ class App extends Component {
 
         <div className="card">
           <div className="card-header">
-            <h2 className="color-grey">Recent Activity</h2>
+            <h2 className="color-lightgrey">Recent Activity</h2>
             <a href="#" className="color-teal">
               See All Activity{' '}
               <span className="icon-horizontal-arrow" />
@@ -69,7 +76,7 @@ class App extends Component {
 
         <div className="card">
           <div className="card-header">
-            <h2 className="color-grey">Weekly Goal Check-ins</h2>
+            <h2 className="color-lightgrey">Weekly Goal Check-ins</h2>
             <a href="#" className="color-teal">
               See All Check-ins
               {' '}

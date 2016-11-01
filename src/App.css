@@ -17,6 +17,10 @@ html {
   color: rgb(26, 236, 169)
 }
 
+.color-lightgrey {
+  color: #d3d3d3;
+}
+
 .equinox-logo {
   width: 130px;
   height: 15px;
@@ -36,6 +40,11 @@ html {
   height: 80px;
 }
 
+.App-welcome {
+  display: flex;
+  align-items: center;
+}
+
 .App-welcome-text {
   text-align: left;
   padding: 20px;
@@ -45,6 +54,19 @@ html {
 
 .App-welcome-text h1 {
    font-size: 20px;
+ }
+
+ .App-checkin-wrapper {
+   margin-left: auto;
+   padding: 20px;
+ }
+
+ .App-checkin-button {
+   background-color: rgb(26, 236, 169);
+   padding: 5px 10px;
+   color: white;
+   text-decoration: inherit;
+   text-transform: uppercase;
  }
 
 /* Actions */
@@ -59,6 +81,10 @@ html {
  .App-action {
    max-width: 100px;
    padding: 10px;
+ }
+
+ .App-action h2 {
+   font-weight: normal;
  }
 
  .App-action:not(:last-child):after {
@@ -135,12 +161,16 @@ html {
 
 .App-header {
   height: 50px;
-  display: flex;
   padding: 20px;
+  text-align: center
+}
+
+.App-header .menu {
+  float: left;
 }
 
 .App-intro {
-  background-image: url(./sprinter.jpg);
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./sprinter.jpg);
   background-size: cover;
 }
 
