@@ -115,6 +115,10 @@ html {
    font-size: 10px;
  }
 
+ .flex {
+   display: flex;
+ }
+
  .card-header {
    display: flex;
  }

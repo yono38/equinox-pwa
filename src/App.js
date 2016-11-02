@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './equinox-logo.png';
 import './App.css';
+import ClassTile from './components/Class';
 
 class App extends Component {
   render() {
@@ -39,6 +40,18 @@ class App extends Component {
             </div>
           </div>
         </div>
+
+        <ClassTile />
+        <ClassTile
+          name="Booked Class"
+          hasReservation={true}
+          instructor="Serena Tom"
+         />
+        <ClassTile
+          name="Full Class"
+          isClassFull={true}
+          instructor="Kevin Lamb"
+        />
 
         <div className="App-up-next card">
           <div className="App-up-next-header card-header">
