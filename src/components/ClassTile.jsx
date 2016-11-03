@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import './Class.css';
+import './ClassTile.css';
 import BookingButton from './BookingButton';
 
 const ClassTile = props => {
@@ -7,13 +7,13 @@ const ClassTile = props => {
     name,
     instructor,
     displayTime,
-    facility,
     isCycling,
     hasReservation,
     isClassFull,
     isBookable,
     reservableItemsLeft
   } = props;
+
   const spotsLeftText = isCycling ? 'bikes' : 'spots';
   let spotsLeftElem = (reservableItemsLeft > 0) ?
     <p className="color-grey text-small">
@@ -23,6 +23,14 @@ const ClassTile = props => {
     <div className="text-small">
       <span className="black-badge booked">Booked</span>
     </div> : null;
+  const bookingBtn = isBookable ?
+    <div className="card-cta">
+      <BookingButton
+        hasReservation={hasReservation}
+        isClassFull={isClassFull}
+      />
+    </div> : null;
+    
   return (
     <div className="class-tile card flex">
       <div className="card-body">
@@ -32,12 +40,7 @@ const ClassTile = props => {
         <p className="label color-grey">{displayTime}</p>
         {bookedBadge}
       </div>
-      <div className="card-cta">
-        <BookingButton
-          hasReservation={hasReservation}
-          isClassFull={isClassFull}
-        />
-      </div>
+      { bookingBtn }
     </div>
   )
 }

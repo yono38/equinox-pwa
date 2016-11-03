@@ -1,0 +1,103 @@
+.Home {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.equinox-logo {
+  width: 130px;
+  height: 15px;
+}
+
+.menu {
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.Home-logo {
+  animation: Home-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.Home-welcome {
+  display: flex;
+  align-items: center;
+}
+
+.Home-welcome-text {
+  text-align: left;
+  padding: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.Home-welcome-text h1 {
+   font-size: 20px;
+ }
+
+ .Home-checkin-wrapper {
+   margin-left: auto;
+   padding: 20px;
+ }
+
+ .Home-checkin-button {
+   background-color: rgb(26, 236, 169);
+   padding: 5px 10px;
+   color: white;
+   text-decoration: inherit;
+   text-transform: uppercase;
+ }
+
+/* Actions */
+ .Home-actions {
+   display: flex;
+   justify-content: space-around;
+   text-transform: uppercase;
+   max-width: 100%;
+   background-color: rgba(10, 10, 10, 0.25);
+ }
+
+ .Home-action {
+   max-width: 100px;
+   padding: 10px;
+   color: white;
+   text-decoration: none;
+ }
+
+ .Home-action h2 {
+   font-weight: normal;
+ }
+
+ .Home-action:not(:last-child):after {
+    border-right: 2px solid #7A7A7B;
+}
+
+
+.checkin-container {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkin {
+  width: 20%;
+  padding: 20px;
+  margin: 0 1px;
+  opacity: 0.7;
+  border-bottom: 2px solid #7A7A7B;
+}
+
+.checkin.active {
+  opacity: 1;
+  background-color: rgba(122,122,123, 0.2);
+  border-bottom: 2px solid rgb(26, 236, 169);
+}
+
+.Home-header {
+  height: 50px;
+}
+
+.Home-intro {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./sprinter.jpg);
+  background-size: cover;
+}

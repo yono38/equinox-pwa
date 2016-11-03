@@ -1,67 +1,55 @@
 import React, { Component } from 'react';
 import logo from './equinox-logo.png';
-import './App.css';
-import ClassTile from './components/Class';
+import './Home.css';
+import { Link } from 'react-router';
 
-class App extends Component {
+class Home extends Component {
   render() {
     return (
-      <div className="App">
-       <div className="App-intro">
-          <div className="App-header">
+      <div className="Home">
+       <div className="Home-intro">
+          <div className="header Home-header">
             <img src={logo} className="equinox-logo" alt="logo" />
             <div className="icon-menu menu" />
           </div>
-          <div className="App-welcome">
-            <div className="App-welcome-text">
+          <div className="Home-welcome">
+            <div className="Home-welcome-text">
               <h1 className="no-margin">Jason</h1>
               <p className="text-small no-margin color-lightgrey">Welcome to Brookfield Place</p>
             </div>
-            <div className="App-checkin-wrapper">
-              <a href="#" className="App-checkin-button text-small">
+            <div className="Home-checkin-wrHomeer">
+              <a href="#" className="Home-checkin-button text-small">
               <span className="icon-marker-dot" />
               {' '}
               Check In
               </a>
             </div>
           </div>
-          <div className="App-actions">
-            <div className="App-action">
+          <div className="Home-actions">
+            <Link to="/classes" className="Home-action">
               <div className="icon-search color-teal" />
               <h2 className="text-small">Search Classes</h2>
-            </div>
-            <div className="App-action">
+            </Link>
+            <div className="Home-action">
               <div className="icon-book-a-class color-teal" />
               <h2 className="text-small">Book a class</h2>
             </div>
-            <div className="App-action">
+            <div className="Home-action">
               <div className="icon-heart color-teal" />
               <h2 className="text-small">View Activity</h2>
             </div>
           </div>
         </div>
 
-        <ClassTile />
-        <ClassTile
-          name="Booked Class"
-          hasReservation={true}
-          instructor="Serena Tom"
-         />
-        <ClassTile
-          name="Full Class"
-          isClassFull={true}
-          instructor="Kevin Lamb"
-        />
-
-        <div className="App-up-next card">
-          <div className="App-up-next-header card-header">
+        <div className="Home-up-next card">
+          <div className="Home-up-next-header card-header">
             <h2 className="color-lightgrey">Up Next</h2>
             <a href="#" className="color-teal">
               View Calendar{' '}
               <span className="icon-horizontal-arrow" />
             </a>
           </div>
-          <div className="App-up-next-body card-body">
+          <div className="Home-up-next-body card-body">
             <h3>The Pursuit: Burn</h3>
             <p className="color-grey">Arnold Schwartenzegger</p>
             <p className="color-grey">12-1 @ Brookfield Place</p>
@@ -112,4 +100,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
