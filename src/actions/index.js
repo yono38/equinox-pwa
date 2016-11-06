@@ -3,6 +3,7 @@
 export const CLASSES_REQUEST = 'classList/CLASSES_REQUEST'
 export const CLASSES_SUCCESS = 'classList/CLASSES_SUCCESS'
 export const CLASSES_FAILURE = 'classList/CLASSES_FAILURE'
+export const SELECT_DAY = 'classList/SELECT_DAY'
 
 import fetch from 'isomorphic-fetch';
 

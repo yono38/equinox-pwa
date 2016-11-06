@@ -1,9 +1,11 @@
-import { CLASSES_REQUEST, CLASSES_SUCCESS, CLASSES_FAILURE } from '../actions';
+import { CLASSES_REQUEST, CLASSES_SUCCESS, CLASSES_FAILURE, SELECT_DAY } from '../actions';
+import moment from 'moment';
 
 const initialState = {
   classes: [],
   requestPending: false,
-  error: false
+  error: false,
+  selectedDay: moment().format('YYYY-MM-DD')
 };
 
 export default function(state = initialState, action) {
@@ -27,6 +29,12 @@ export default function(state = initialState, action) {
         requestPending: false,
         error: action.error
       })
+    }
+
+    case SELECT_DAY: {
+      return Object.assign({}, state, {
+        selectedDay: action.day
+      });
     }
 
     default:

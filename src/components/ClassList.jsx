@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import ClassTile from './ClassTile';
+import DayPicker from './DayPicker';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 class ClassList extends Component {
   componentDidMount() {
@@ -10,9 +12,8 @@ class ClassList extends Component {
   }
 
   render() {
-    console.log(this.props)
     const classes = this.props.classes
-      .map(classItem => <ClassTile {...classItem} />);
+      .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
     const loader = this.props.isLoading ?
       (<div className="loader-wrapper">
         <div className="loader" />
@@ -23,6 +24,10 @@ class ClassList extends Component {
           Book a class
           <Link className="menu icon-left-arrow" to="/" />
         </div>
+        <DayPicker
+          selectedDay={this.props.activeDayIdx}
+          onDaySelect={this.props.onDaySelect}
+        />
         { loader }
         { classes }
       </div>
@@ -33,7 +38,14 @@ class ClassList extends Component {
 ClassList.propTypes = {
   onDidMount: PropTypes.function,
   isLoading: PropTypes.bool,
-  classes: PropTypes.array
+  classes: PropTypes.array,
+  activeDayIdx: PropTypes.string,
+  onDaySelect: PropTypes.func
+};
+
+ClassList.defaultProps = {
+  activeDayIdx: moment().format('YYYY-MM-DD'),
+  onDaySelect: () => {}
 };
 
 export default ClassList;
