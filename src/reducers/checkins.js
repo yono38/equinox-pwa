@@ -1,47 +1,40 @@
-import moment from 'moment';
 import {
-  CLASSES_REQUEST,
-  CLASSES_SUCCESS,
-  CLASSES_FAILURE,
-  SELECT_DAY
-} from '../actions/classes';
+  CHECKINS_REQUEST,
+  CHECKINS_SUCCESS,
+  CHECKINS_FAILURE
+} from '../actions/checkins';
 
 const initialState = {
-  classes: [],
+  checkins: [],
+  totals: {},
   requestPending: false,
   error: false,
-  selectedDay: moment().format('YYYY-MM-DD')
 };
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case CLASSES_REQUEST:
+    case CHECKINS_REQUEST: {
       return Object.assign({}, state, {
         requestPending: true,
         error: false
       });
+    }
 
-    case CLASSES_SUCCESS: {
+    case CHECKINS_SUCCESS: {
       return Object.assign({}, state, {
         requestPending: false,
         error: false,
-        classes: action.classes
+        checkins: action.checkins,
+        totals: action.totals,
       });
     }
 
-    case CLASSES_FAILURE: {
+    case CHECKINS_FAILURE: {
       return Object.assign({}, state, {
         requestPending: false,
         error: action.error
       })
     }
-
-    case SELECT_DAY: {
-      return Object.assign({}, state, {
-        selectedDay: action.day
-      });
-    }
-
     default:
       return state;
   }

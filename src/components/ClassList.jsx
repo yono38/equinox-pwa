@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
+
 import ClassTile from './ClassTile';
 import DayPicker from './DayPicker';
+import Loader from './Loader';
 import { Link } from 'react-router';
 import moment from 'moment';
 
@@ -14,10 +16,7 @@ class ClassList extends Component {
   render() {
     const classes = this.props.classes
       .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
-    const loader = this.props.isLoading ?
-      (<div className="loader-wrapper">
-        <div className="loader" />
-      </div>) : null;
+    const loader = <Loader isLoading={this.props.isLoading} />;
     return (
       <div>
         <div className="header">

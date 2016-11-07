@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './equinox-logo.png';
 import './Home.css';
 import { Link } from 'react-router';
+import CheckinSummary from './components/CheckinSummary';
 
 class Home extends Component {
   render() {
@@ -75,26 +76,8 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="card">
-          <div className="card-header">
-            <h2 className="color-lightgrey">Weekly Goal Check-ins</h2>
-            <a href="#" className="color-teal">
-              See All Check-ins
-              {' '}
-              <span className="icon-horizontal-arrow" />
-            </a>
-          </div>
-          <div className="card-body">
-            <div className="checkin-container">
-              <div className="checkin active">1</div>
-              <div className="checkin active">2</div>
-              <div className="checkin">3</div>
-              <div className="checkin">4</div>
-              <div className="checkin">5</div>
-            </div>
-          </div>
-        </div>
-
+        <CheckinSummary />
+        
       </div>
     );
   }

@@ -1,11 +1,11 @@
 // components/CounterApp.jsx
 import { connect } from 'react-redux';
-import { loadClasses } from '../actions';
+import { loadClasses } from '../actions/classes';
 import ClassList from './ClassList';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    classes: state.classes.map(classItem => {
+    classes: state.classes.classes.map(classItem => {
       return {
         name: classItem.name,
         instructor: classItem.instructor,
