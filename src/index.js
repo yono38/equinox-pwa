@@ -13,11 +13,14 @@ const store = createStore(classReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
   window.__REDUX_DEVTOOLS_EXTENSION__())
 
+const BookableClasses = () => <ClassListApp bookableOnly={true} />;
+
 render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Home} />
       <Route path="/classes" component={ClassListApp} />
+      <Route path="/bookClasses" component={BookableClasses} />
     </Router>
   </Provider>
 ), document.getElementById('root'))

@@ -29,7 +29,7 @@ export const processError = error => {
 
 export const loadClasses = (dispatch) => {
 	dispatch(requestClasses());
-	fetch(`https://jason-tracker.herokuapp.com/trackers/gym/classes`)
+	fetch(`http://localhost:4555/trackers/gym/classes`)
 		.then(response => response.json())
 		.then((response) => dispatch(processSuccess(response)))
 		.catch((err) => dispatch(processError(err)));

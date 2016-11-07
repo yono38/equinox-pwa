@@ -3,6 +3,7 @@ import logo from './equinox-logo.png';
 import './Home.css';
 import { Link } from 'react-router';
 import CheckinSummary from './components/CheckinSummary';
+import ClassSummary from './components/ClassSummary';
 
 class Home extends Component {
   render() {
@@ -28,13 +29,13 @@ class Home extends Component {
           </div>
           <div className="Home-actions">
             <Link to="/classes" className="Home-action">
-              <div className="icon-search color-teal" />
-              <h2 className="text-small">Search Classes</h2>
+              <div className="icon-training color-teal" />
+              <h2 className="text-small">Class List</h2>
             </Link>
-            <div className="Home-action">
+            <Link to="/bookClasses" className="Home-action">
               <div className="icon-book-a-class color-teal" />
               <h2 className="text-small">Book a class</h2>
-            </div>
+            </Link>
             <div className="Home-action">
               <div className="icon-heart color-teal" />
               <h2 className="text-small">View Activity</h2>
@@ -42,25 +43,7 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="Home-up-next card">
-          <div className="Home-up-next-header card-header">
-            <h2 className="color-lightgrey">Up Next</h2>
-            <a href="#" className="color-teal">
-              View Calendar{' '}
-              <span className="icon-horizontal-arrow" />
-            </a>
-          </div>
-          <div className="Home-up-next-body card-body">
-            <h3>The Pursuit: Burn</h3>
-            <p className="color-grey">Arnold Schwartenzegger</p>
-            <p className="color-grey">12-1 @ Brookfield Place</p>
-            <div className="text-small">
-              <span className="black-badge booked">Booked</span>
-              {' '}
-              <strong>Bike #22</strong>
-            </div>
-          </div>
-        </div>
+        <ClassSummary />
 
         <div className="card">
           <div className="card-header">
@@ -77,7 +60,7 @@ class Home extends Component {
         </div>
 
         <CheckinSummary />
-        
+
       </div>
     );
   }

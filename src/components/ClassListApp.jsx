@@ -4,8 +4,12 @@ import { loadClasses } from '../actions/classes';
 import ClassList from './ClassList';
 
 const mapStateToProps = (state, ownProps) => {
+  const shownClasses = ownProps.bookableOnly ?
+    state.classes.classes.filter(classItem => classItem.isBookingRequired)
+    : state.classes.classes;
   return {
-    classes: state.classes.classes.map(classItem => {
+    headerTitle: ownProps.bookableOnly ? 'Book a Class' : 'Class List',
+    classes: shownClasses.map(classItem => {
       return {
         name: classItem.name,
         instructor: classItem.instructor,

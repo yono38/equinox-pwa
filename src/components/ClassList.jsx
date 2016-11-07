@@ -20,7 +20,7 @@ class ClassList extends Component {
     return (
       <div>
         <div className="header">
-          Book a class
+          {this.props.headerTitle}
           <Link className="menu icon-left-arrow" to="/" />
         </div>
         <DayPicker
@@ -37,6 +37,7 @@ class ClassList extends Component {
 ClassList.propTypes = {
   onDidMount: PropTypes.function,
   isLoading: PropTypes.bool,
+  headerTitle: PropTypes.string,
   classes: PropTypes.array,
   activeDayIdx: PropTypes.string,
   onDaySelect: PropTypes.func
@@ -44,6 +45,7 @@ ClassList.propTypes = {
 
 ClassList.defaultProps = {
   activeDayIdx: moment().format('YYYY-MM-DD'),
+  headerTitle: 'Class List',
   onDaySelect: () => {}
 };
 
