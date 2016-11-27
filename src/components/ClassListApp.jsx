@@ -3,33 +3,27 @@ import { connect } from 'react-redux';
 import { loadClasses } from '../actions/classes';
 import ClassList from './ClassList';
 
+import {
+  getSelectedDay,
+  getIsLoading,
+  getIsFailed,
+  getMappedClasses
+} from '../selectors';
+
 const mapStateToProps = (state, ownProps) => {
-  const shownClasses = ownProps.bookableOnly ?
-    state.classes.classes.filter(classItem => classItem.isBookingRequired)
-    : state.classes.classes;
   return {
     headerTitle: ownProps.bookableOnly ? 'Book a Class' : 'Class List',
-    classes: shownClasses.map(classItem => {
-      return {
-        name: classItem.name,
-        instructor: classItem.instructor,
-        displayTime: classItem.displayTime,
-        isCycling: false,
-        hasReservation: classItem.status.hasReservation,
-        isClassFull: classItem.status.isClassFull,
-        isBookable: classItem.isBookingRequired,
-        reservableItemsLeft: classItem.status.reservableItemsLeft
-      };
-    }),
-    isLoading: state.requestPending || false
+    classes: getMappedClasses(state, ownProps),
+    selectedDay: getSelectedDay(state),
+    isLoading: getIsLoading(state),
+    // TODO use this
+    isFailed: getIsFailed(state)
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onDidMount: () => {
-      loadClasses(dispatch);
-    }
+    initClassList: (startDate) => dispatch(loadClasses(startDate))
   }
 };
 
@@ -37,5 +31,6 @@ const ClassListApp = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ClassList);
+
 
 export default ClassListApp;

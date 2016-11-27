@@ -8,8 +8,8 @@ import moment from 'moment';
 
 class ClassList extends Component {
   componentDidMount() {
-    if (this.props.onDidMount && this.props.classes.length === 0) {
-      this.props.onDidMount();
+    if (this.props.initClassList && this.props.selectedDay) {
+      this.props.initClassList(this.props.selectedDay);
     }
   }
 
@@ -24,8 +24,8 @@ class ClassList extends Component {
           <Link className="menu icon-left-arrow" to="/" />
         </div>
         <DayPicker
-          selectedDay={this.props.activeDayIdx}
-          onDaySelect={this.props.onDaySelect}
+          selectedDay={this.props.selectedDay}
+          onDaySelect={this.props.initClassList}
         />
         { loader }
         { classes }
@@ -39,12 +39,12 @@ ClassList.propTypes = {
   isLoading: PropTypes.bool,
   headerTitle: PropTypes.string,
   classes: PropTypes.array,
-  activeDayIdx: PropTypes.string,
+  selectedDay: PropTypes.string,
   onDaySelect: PropTypes.func
 };
 
 ClassList.defaultProps = {
-  activeDayIdx: moment().format('YYYY-MM-DD'),
+  selectedDay: moment().format('YYYY-MM-DD'),
   headerTitle: 'Class List',
   onDaySelect: () => {}
 };

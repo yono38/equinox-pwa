@@ -52,9 +52,10 @@ CheckinSummary.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const checkInState = state.modules.checkins;
   return {
-    totals: state.checkins.totals,
-    isLoading: state.checkins.requestPending
+    totals: checkInState.totals,
+    isLoading: checkInState.requestPending
   };
 };
 

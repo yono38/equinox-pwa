@@ -5,19 +5,23 @@ import './DayPicker.css';
 const DayPicker = props => {
   const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   const selectedDayIdx = moment(props.selectedDay).day();
-  const daysList = dayNames.map((day, idx) => (
-    <li
-       key={`day-${idx}`}
-    >
-      <a
-       href="#"
-       className={idx === selectedDayIdx ? 'active': ''}
-       onClick={props.onDaySelect.bind(null, idx)}
-       >
-        {day}
-       </a>
-    </li>
-  ));
+  const firstDay = moment(props.selectedDay).subtract(selectedDayIdx, 'days');
+  const daysList = dayNames.map((day, idx) => {
+    const formattedDay = moment(firstDay).add(idx, 'days').format('YYYY-MM-DD');
+    return (
+      <li
+         key={`day-${idx}`}
+      >
+        <a
+         href="#"
+         className={idx === selectedDayIdx ? 'active': ''}
+         onClick={props.onDaySelect.bind(null, formattedDay)}
+         >
+          {day}
+         </a>
+      </li>
+    )
+  })
   return (
     <ul className="day-picker">{daysList}</ul>
   )
