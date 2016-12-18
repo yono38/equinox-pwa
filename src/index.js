@@ -9,6 +9,7 @@ import classReducer from './reducers';
 
 import Home from './Home';
 import ClassListApp from './components/ClassListApp';
+import BookClass from './components/BookClass';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -24,14 +25,12 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-const BookableClasses = () => <ClassListApp bookableOnly={true} />;
-
 render((
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Home} />
       <Route path="/classes" component={ClassListApp} />
-      <Route path="/bookClasses" component={BookableClasses} />
+      <Route path="/classes/:classId" component={BookClass} />
     </Router>
   </Provider>
 ), document.getElementById('root'))

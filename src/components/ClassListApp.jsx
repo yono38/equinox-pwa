@@ -8,7 +8,7 @@ import {
   getIsLoading,
   getIsFailed,
   getMappedClasses
-} from '../selectors';
+} from '../selectors/classes';
 
 const mapStateToProps = (state, ownProps) => {
   return {

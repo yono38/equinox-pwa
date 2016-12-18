@@ -32,7 +32,7 @@ class Home extends Component {
               <div className="icon-training color-teal" />
               <h2 className="text-small">Class List</h2>
             </Link>
-            <Link to="/bookClasses" className="Home-action">
+            <Link to="/classes?bookable=true" className="Home-action">
               <div className="icon-book-a-class color-teal" />
               <h2 className="text-small">Book a class</h2>
             </Link>

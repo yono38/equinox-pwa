@@ -1,0 +1,43 @@
+.book-class-page {
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+.book-class-page h2, h4 {
+  color: white;
+  font-weight: normal;
+  letter-spacing: 1.1px;
+}
+
+.book-class-page h2 {
+  font-size: 13px;
+}
+
+.book-class-page h4 {
+  font-size: 11px;
+}
+
+.book-class-page .bike-item {
+  font-weight: bold;
+}
+
+.book-class-page .loader {
+  font-size: 4px;
+  margin: 40px auto;
+}
+
+.book-class-page .cancel-bike {
+  background: rgb(26, 236, 169);
+  border: none;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.book-class-page .booked-bike {
+  padding: 10px;
+  font-weight: normal;
+  font-size: 20px;
+}

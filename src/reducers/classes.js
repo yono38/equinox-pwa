@@ -5,6 +5,8 @@ import {
   CLASSES_REQUEST,
   CLASSES_SUCCESS,
   CLASSES_FAILURE,
+  BOOK_CLASS_SUCCESS,
+  CANCEL_CLASS_SUCCESS,
   SELECT_DAY
 } from '../actions/classes';
 
@@ -40,6 +42,16 @@ export default function(state = initialState, action) {
         .setIn(['inProgress', action.startDate], false)
         .setIn(['isError', action.startDate], true);
     }
+
+    case BOOK_CLASS_SUCCESS: {
+      return state
+        .setIn(['list', action.classId, 'status', 'localId'], action.bikeName)
+        .setIn(['list', action.classId, 'status', 'hasReservation'], true);
+    }
+
+    case CANCEL_CLASS_SUCCESS:
+      return state
+        .setIn(['list', action.classId, 'status'], fromJS(action.reservationStatus));
 
     case SELECT_DAY:
       return state.set('selectedDay', action.startDate);

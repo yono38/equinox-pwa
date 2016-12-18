@@ -4,6 +4,7 @@ import BookingButton from './BookingButton';
 
 const ClassTile = props => {
   const {
+    classId,
     name,
     instructor,
     displayTime,
@@ -26,11 +27,12 @@ const ClassTile = props => {
   const bookingBtn = isBookable ?
     <div className="card-cta">
       <BookingButton
+        classId={classId}
         hasReservation={hasReservation}
         isClassFull={isClassFull}
       />
     </div> : null;
-    
+
   return (
     <div className="class-tile card flex">
       <div className="card-body">

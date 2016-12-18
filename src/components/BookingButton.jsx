@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import './BookingButton.css';
 
 const BookingButton = (props) => {
-  const { isClassFull, hasReservation } = props;
+  const { isClassFull, hasReservation, classId } = props;
   let buttonText = isClassFull ? 'Full' : 'Book';
   let cancelClass = '';
   if (hasReservation) {
@@ -10,18 +11,21 @@ const BookingButton = (props) => {
     cancelClass = 'cancel';
   }
   return (
-    <button
-      disabled={!hasReservation && isClassFull}
-      className={`booking-button ${cancelClass}`}
-    >
-      {buttonText}
-    </button>
+    <Link to={`/classes/${classId}`}>
+      <button
+        disabled={!hasReservation && isClassFull}
+        className={`booking-button ${cancelClass}`}
+      >
+        {buttonText}
+      </button>
+    </Link>
   )
 }
 
 BookingButton.propTypes = {
+  classId: PropTypes.number,
   hasReservation: PropTypes.bool,
-  isClassFull: PropTypes.bool
+  isClassFull: PropTypes.bool,
 };
 
 export default BookingButton;
