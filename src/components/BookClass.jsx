@@ -14,6 +14,17 @@ import { bookBike, cancelBike } from '../actions/classes';
 import Loader from './Loader';
 
 class BookClass extends Component {
+  componentDidMount() {
+    const { classItem, isLoading, isFailed, bikes, router } = this.props;
+    const classId = router.params.classId;
+    const hasReservation = classItem && classItem.status ? classItem.status.hasReservation : false;
+    console.log(hasReservation, classId, isLoading, isFailed, bikes)
+
+    if (!hasReservation && classId && !isLoading && !isFailed && isEmpty(bikes)) {
+      this.props.initBikeList(classId);
+    }
+  }
+
   render() {
     const {
       isLoading,
@@ -27,10 +38,6 @@ class BookClass extends Component {
 
     const hasReservation = classItem ? classItem.status.hasReservation : false;
     const classId = router.params.classId;
-
-    if (!hasReservation && classId && !isLoading && !isFailed && isEmpty(bikes)) {
-      this.props.initBikeList(classId);
-    }
 
     const classInfoSection = !isEmpty(classItem) ?
     (<div className="class-info">
@@ -47,7 +54,7 @@ class BookClass extends Component {
     return (
       <div className="book-class-page">
         <div className="header">
-          <Link className="menu icon-left-arrow" to="/" />
+          <a onClick={this.props.router.goBack} className="menu icon-left-arrow" />
           <img src={logo} className="equinox-logo" alt="logo" />
         </div>
         { classInfoSection }
@@ -60,10 +67,9 @@ class BookClass extends Component {
           </div>
         }
         {
-          !hasReservation &&
+          !hasReservation && !isEmpty(bikes) &&
           <div className="bikes">
-            {this.props.bikes.map(bike => {
-              console.log(bike);
+            {bikes.map(bike => {
               const bikeOnClick = () => bookBike(classId, bike.id, bike.name);
               return (
                 <div onClick={bikeOnClick} className="bike-item card">
@@ -71,6 +77,13 @@ class BookClass extends Component {
                 </div>
               );
             })}
+          </div>
+        }
+        {
+          !isLoading && !hasReservation && isEmpty(bikes) &&
+          <div className="error-message">
+            <h2>Sorry!</h2>
+            <p>No bikes are available at this time, try another class.</p>
           </div>
         }
       </div>

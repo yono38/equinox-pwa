@@ -21,6 +21,22 @@ body {
   float: left;
   color: white;
   text-decoration: none;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.header .dropdown {
+  position: absolute;
+  top: 40px;
+  background: white;
+  padding: 5px 25px 50px 25px;
+}
+
+.header .dropdown a {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 .color-grey {

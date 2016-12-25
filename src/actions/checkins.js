@@ -1,9 +1,10 @@
-// Namespace actions
+import { API_ROOT_URL } from '../constants';
+import { getAuthToken } from '../utils';
+import fetch from 'isomorphic-fetch';
+
 export const CHECKINS_REQUEST = 'checkins/CHECKINS_REQUEST'
 export const CHECKINS_SUCCESS = 'checkins/CHECKINS_SUCCESS'
 export const CHECKINS_FAILURE = 'checkins/CHECKINS_FAILURE'
-
-import fetch from 'isomorphic-fetch';
 
 export const requestCheckins = () => {
 	return {
@@ -29,7 +30,11 @@ export const processError = error => {
 
 export const loadCheckins = (dispatch) => {
 	dispatch(requestCheckins());
-	fetch(`http://localhost:4555/trackers/gym/checkins`)
+	fetch(`${API_ROOT_URL}/checkins`, {
+      headers: {
+        'Authorization': getAuthToken()
+      }
+		})
 		.then(response => response.json())
 		.then((response) => dispatch(processSuccess(response)))
 		.catch((err) => dispatch(processError(err)));

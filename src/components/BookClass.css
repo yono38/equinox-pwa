@@ -41,3 +41,14 @@
   font-weight: normal;
   font-size: 20px;
 }
+
+.book-class-page .error-message h2 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.book-class-page .error-message p {
+  margin: 5px;
+  letter-spacing: 1.25px;
+  line-height: 25px;
+}

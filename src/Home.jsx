@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from './equinox-logo.png';
 import './Home.css';
 import { Link } from 'react-router';
 import CheckinSummary from './components/CheckinSummary';
 import ClassSummary from './components/ClassSummary';
+import HomeMenu from './components/HomeMenu';
+import { logout } from './actions/auth';
 
 class Home extends Component {
   render() {
+    const logoutOnClick = () => {
+      this.props.onClickLogout(this.props.router.replace);
+    }
     return (
       <div className="Home">
        <div className="Home-intro">
           <div className="header Home-header">
             <img src={logo} className="equinox-logo" alt="logo" />
-            <div className="icon-menu menu" />
+            <HomeMenu logoutOnClick={logoutOnClick} />
           </div>
           <div className="Home-welcome">
             <div className="Home-welcome-text">
@@ -66,4 +72,14 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state, ownProps) => {
+  return {};
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClickLogout: (replace) => dispatch(logout(replace))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

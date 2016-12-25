@@ -1,10 +1,11 @@
+import { API_ROOT_URL } from '../constants';
+import { getIsLoading } from '../selectors/bikes';
+import { getAuthToken } from '../utils';
+import fetch from 'isomorphic-fetch';
+
 export const BIKES_REQUEST = 'bikes/BIKES_REQUEST'
 export const BIKES_SUCCESS = 'bikes/BIKES_SUCCESS'
 export const BIKES_FAILURE = 'bikes/BIKES_FAILURE'
-
-import { getIsLoading } from '../selectors/bikes';
-
-import fetch from 'isomorphic-fetch';
 
 export const requestBikes = (classId) => {
 	return {
@@ -21,6 +22,7 @@ export const processSuccess = (response) => {
 }
 
 export const processError = (error) => {
+	console.log(error);
 	return {
 		type: BIKES_FAILURE,
 		error
@@ -35,7 +37,11 @@ export const loadBikes = (classId) => {
 		// Load classes if not already requested
 		if (!isLoading) {
 			dispatch(requestBikes(classId));
-			fetch(`https://jason-tracker.herokuapp.com/trackers/gym/classes/${classId}/bikes`)
+			fetch(`${API_ROOT_URL}/classes/${classId}/bikes`, {
+	        headers: {
+	          'Authorization': getAuthToken()
+	        }
+				})
 				.then(response => response.json())
 				.then((response) => dispatch(processSuccess(response)))
 				.catch((err) => dispatch(processError(err)));

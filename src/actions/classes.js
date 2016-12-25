@@ -1,4 +1,13 @@
-// Namespace actions
+import { API_ROOT_URL } from '../constants';
+import { getAuthToken } from '../utils';
+import fetch from 'isomorphic-fetch';
+
+import {
+	getIsLoading,
+	getIsFailed,
+	getClassIds,
+} from '../selectors/classes';
+
 export const CLASSES_REQUEST = 'classList/CLASSES_REQUEST'
 export const CLASSES_SUCCESS = 'classList/CLASSES_SUCCESS'
 export const CLASSES_FAILURE = 'classList/CLASSES_FAILURE'
@@ -12,14 +21,6 @@ export const CANCEL_CLASS_SUCCESS = 'classList/CANCEL_CLASS_SUCCESS'
 export const CANCEL_CLASS_FAILURE = 'classList/CANCEL_CLASS_FAILURE'
 
 export const SELECT_DAY = 'classList/SELECT_DAY'
-
-import {
-	getIsLoading,
-	getIsFailed,
-	getClassIds,
-} from '../selectors/classes';
-
-import fetch from 'isomorphic-fetch';
 
 export const requestClasses = (startDate) => {
 	return {
@@ -60,7 +61,11 @@ export const loadClasses = (startDate) => {
 		// Load classes if not already requested
 		if (!isLoading && !hasClasses) {
 			dispatch(requestClasses(startDate));
-			fetch(`https://jason-tracker.herokuapp.com/trackers/gym/classes?startDate=${startDate}`)
+			fetch(`${API_ROOT_URL}/classes?startDate=${startDate}`, {
+					headers: {
+						'Authorization': getAuthToken()
+					}
+				})
 				.then(response => response.json())
 				.then((response) => dispatch(processSuccess(response, startDate)))
 				.catch((err) => dispatch(processError(err, startDate)));
@@ -70,7 +75,18 @@ export const loadClasses = (startDate) => {
 
 export const bookBike = (classId, bikeId, bikeName) => {
 	return (dispatch, getState) => {
-		fetch(`https://jason-tracker.herokuapp.com/trackers/gym/classes/${classId}/book/${bikeId}`)
+		console.log('I have a bikeId: ', bikeId)
+		fetch(`${API_ROOT_URL}/classes/${classId}`, {
+				method: 'POST',
+				body: JSON.stringify({
+					bikeId
+				}),
+        headers: {
+          'Authorization': getAuthToken(),
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+        }
+      })
 			.then(response => response.json())
 			.then(response => {
 				if (response.reservationSuccess === true) {
@@ -94,7 +110,12 @@ export const bookBike = (classId, bikeId, bikeName) => {
 
 export const cancelBike = (classId) => {
 	return (dispatch, getState) => {
-		fetch(`https://jason-tracker.herokuapp.com/trackers/gym/classes/${classId}/cancel`)
+		fetch(`${API_ROOT_URL}/classes/${classId}`, {
+				method: 'DELETE',
+        headers: {
+          'Authorization': getAuthToken()
+        }
+      })
 			.then(response => response.json())
 			.then(response => {
 				if (response.success === true) {
