@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { loadCheckins } from '../actions/checkins';
-import Loader from './Loader';
+import Loader from 'react-loading';
 import './CheckinSummary.css';
 
 export class CheckinSummary extends Component {
@@ -13,11 +13,11 @@ export class CheckinSummary extends Component {
   }
 
   render() {
-    console.log(this.props.totals.week);
+    const { totals, isLoading } = this.props;
     const dayCheckinBars = [1,2,3,4,5].map(idx =>
       <div
         key={`checkin-summary-${idx}`}
-        className={idx <= this.props.totals.week ? 'checkin active': 'checkin'}
+        className={idx <= totals.week ? 'checkin active': 'checkin'}
       >
         {idx}
       </div>
@@ -32,13 +32,17 @@ export class CheckinSummary extends Component {
             <span className="icon-horizontal-arrow" />
           </a>
         </div>
-        <Loader isLoading={this.props.isLoading} className="color-teal small" />
-        { !this.props.isLoading ?
+        { isLoading &&
+          <div className="loading no-margin-top">
+            <Loader type="bubbles" color="#1aeca9" />
+          </div>
+        }
+        { !isLoading ?
           <div className="card-body">
             <div className="checkin-container">
               {dayCheckinBars}
             </div>
-            <h4>Monthly Checkins: {this.props.totals.month}</h4>
+            <h4>Monthly Checkins: {totals.month}</h4>
           </div> : null
         }
       </div>
@@ -49,6 +53,10 @@ export class CheckinSummary extends Component {
 CheckinSummary.propTypes = {
   totals: PropTypes.object,
   isLoading: PropTypes.bool
+};
+
+CheckinSummary.propTypes = {
+  totals: {}
 };
 
 const mapStateToProps = (state, ownProps) => {

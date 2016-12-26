@@ -1,10 +1,11 @@
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
+import moment from 'moment';
+import sortBy from 'lodash/sortBy';
 
 import ClassTile from './ClassTile';
 import DayPicker from './DayPicker';
-import Loader from './Loader';
-import { Link } from 'react-router';
-import moment from 'moment';
+import Loader from 'react-loading';
 
 class ClassList extends Component {
   componentDidMount() {
@@ -14,9 +15,10 @@ class ClassList extends Component {
   }
 
   render() {
-    const classes = this.props.classes
+    // const { isLoading } = this.props;
+    const isLoading = true;
+    const classes = sortBy(this.props.classes, classItem => classItem.startDate)
       .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
-    const loader = <Loader isLoading={this.props.isLoading} />;
     return (
       <div>
         <div className="header">
@@ -27,25 +29,29 @@ class ClassList extends Component {
           selectedDay={this.props.selectedDay}
           onDaySelect={this.props.initClassList}
         />
-        { loader }
-        { classes }
+        { isLoading &&
+          <div className="loading">
+            <Loader type="bubbles" />
+          </div>
+        }
+        { !isLoading && classes }
       </div>
     );
   }
 }
 
 ClassList.propTypes = {
-  onDidMount: PropTypes.function,
-  isLoading: PropTypes.bool,
-  headerTitle: PropTypes.string,
   classes: PropTypes.array,
+  headerTitle: PropTypes.string,
+  initClassList: PropTypes.func,
+  isLoading: PropTypes.bool,
+  onDaySelect: PropTypes.func,
   selectedDay: PropTypes.string,
-  onDaySelect: PropTypes.func
 };
 
 ClassList.defaultProps = {
-  selectedDay: moment().format('YYYY-MM-DD'),
   headerTitle: 'Class List',
+  selectedDay: moment().format('YYYY-MM-DD'),
   onDaySelect: () => {}
 };
 

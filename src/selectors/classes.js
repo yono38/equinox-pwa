@@ -52,14 +52,17 @@ export const getMappedClasses = createSelector(
   [getClasses], (classItems) => classItems.map(
     classItem => ({
         classId: classItem.id,
-        name: classItem.name,
         instructor: classItem.instructor,
         displayTime: classItem.displayTime,
-        isCycling: false,
         hasReservation: classItem.status.hasReservation,
-        isClassFull: classItem.status.isClassFull,
         isBookable: classItem.isBookingRequired,
-        reservableItemsLeft: classItem.status.reservableItemsLeft
+        isBookingOpen: classItem.status.isWithinReservationPeriod,
+        isClassFull: classItem.status.isClassFull,
+        isCycling: classItem.category === 'Cycling',
+        name: classItem.name,
+        reservableItemsLeft: classItem.status.reservableItemsLeft,
+        startDate: classItem.startDate,
+        timeLeftText: classItem.status.timeLeftText,
     })
   )
 )

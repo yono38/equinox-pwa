@@ -12,14 +12,23 @@ const ClassTile = props => {
     hasReservation,
     isClassFull,
     isBookable,
-    reservableItemsLeft
+    isBookingOpen,
+    reservableItemsLeft,
+    timeLeftText
   } = props;
+  console.log(props);
 
   const spotsLeftText = isCycling ? 'bikes' : 'spots';
-  let spotsLeftElem = (reservableItemsLeft > 0) ?
+  let spotsLeftElem = (isBookingOpen && reservableItemsLeft > 0) ?
     <p className="color-grey text-small">
       {reservableItemsLeft} {spotsLeftText} left
     </p> : null;
+  const timeLeftLabel = timeLeftText ? (
+    <p className="text-small">
+      <span className="icon-lock" />
+      <strong>&nbsp;{timeLeftText}</strong>
+    </p>
+  ) : null;
   const bookedBadge = hasReservation ?
     <div className="text-small">
       <span className="black-badge booked">Booked</span>
@@ -30,6 +39,7 @@ const ClassTile = props => {
         classId={classId}
         hasReservation={hasReservation}
         isClassFull={isClassFull}
+        isBookingOpen={isBookingOpen}
       />
     </div> : null;
 
@@ -37,6 +47,7 @@ const ClassTile = props => {
     <div className="class-tile card flex">
       <div className="card-body">
         <h3>{name}</h3>
+        {timeLeftLabel}
         {spotsLeftElem}
         <p className="label color-grey">{instructor}</p>
         <p className="label color-grey">{displayTime}</p>

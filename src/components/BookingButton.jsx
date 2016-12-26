@@ -3,17 +3,19 @@ import { Link } from 'react-router';
 import './BookingButton.css';
 
 const BookingButton = (props) => {
-  const { isClassFull, hasReservation, classId } = props;
+  const { isClassFull, isBookingOpen, hasReservation, classId } = props;
   let buttonText = isClassFull ? 'Full' : 'Book';
   let cancelClass = '';
   if (hasReservation) {
     buttonText = 'Cancel';
     cancelClass = 'cancel';
+  } else if (!isBookingOpen) {
+    buttonText = 'Not Open';
   }
   return (
     <Link to={`/classes/${classId}`}>
       <button
-        disabled={!hasReservation && isClassFull}
+        disabled={!hasReservation && (!isBookingOpen || isClassFull)}
         className={`booking-button ${cancelClass}`}
       >
         {buttonText}

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import isEmpty from 'lodash/isEmpty';
 
 import logo from '../equinox-logo.png';
@@ -11,7 +10,7 @@ import { getIsLoading, getIsFailed, getBikes } from '../selectors/bikes';
 import { loadBikes } from '../actions/bikes';
 import { bookBike, cancelBike } from '../actions/classes';
 
-import Loader from './Loader';
+import Loader from 'react-loading';
 
 class BookClass extends Component {
   componentDidMount() {
@@ -40,15 +39,14 @@ class BookClass extends Component {
     const classId = router.params.classId;
 
     const classInfoSection = !isEmpty(classItem) ?
-    (<div className="class-info">
-      <h2>{classItem.name} | {classItem.instructor}</h2>
-      <h4>{classItem.displayTime}</h4>
-    </div>) :
-    (<div className="class-info">
-     <h2>Book Your Bike</h2>
-    </div>);
+      (<div className="class-info">
+        <h2>{classItem.name} | {classItem.instructor}</h2>
+        <h4>{classItem.displayTime}</h4>
+      </div>) :
+      (<div className="class-info">
+       <h2>Book Your Bike</h2>
+      </div>);
 
-    const loader = <Loader isLoading={isLoading} />;
     const cancelBikeOnClick = () => cancelBike(classId);
 
     return (
@@ -58,7 +56,11 @@ class BookClass extends Component {
           <img src={logo} className="equinox-logo" alt="logo" />
         </div>
         { classInfoSection }
-        { loader }
+        { isLoading &&
+          <div className="loading">
+            <Loader type="bubbles" />
+          </div>
+        }
         {
           hasReservation &&
           <div className="booked-bike">

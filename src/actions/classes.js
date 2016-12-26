@@ -68,7 +68,7 @@ export const loadClasses = (startDate) => {
 				})
 				.then(response => response.json())
 				.then((response) => dispatch(processSuccess(response, startDate)))
-				.catch((err) => dispatch(processError(err, startDate)));
+				.catch((err) => { console.log(err); dispatch(processError(err, startDate))});
 		}
 	}
 }

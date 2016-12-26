@@ -28,8 +28,10 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store)
 
 function requireAuth(nextState, replaceState) {
+  console.log('yo!')
+  console.log(nextState)
   if (!getAuthToken()) {
-    replaceState({ nextPathname: nextState.location.pathname }, '/login')
+    replaceState('/login');
   }
 }
 

@@ -107,6 +107,15 @@ body {
    text-align: left;
 }
 
+.loading div {
+  display: block;
+  margin: 100px auto 0;
+}
+
+.loading.no-margin-top div {
+  margin-top: 0;
+}
+
 @font-face {
   font-family: 'icomoon';
   src: url("./fonts/icomoon.eot");
