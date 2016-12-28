@@ -1,13 +1,7 @@
 .booking-button {
-  letter-spacing: initial;
-  padding: 15px 35px;
   background-color: black;
   border: none;
   color: white;
-  font-size: 10px;
-  text-decoration: none;
-  text-transform: uppercase;
-  min-width: 110px;
 }
 
 .booking-button:disabled {
@@ -15,5 +9,5 @@
 }
 
 .booking-button.cancel {
-  background-color: rgb(26, 236, 169);
+  border: none;
 }

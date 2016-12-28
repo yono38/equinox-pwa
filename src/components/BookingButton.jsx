@@ -16,7 +16,7 @@ const BookingButton = (props) => {
     <Link to={`/classes/${classId}`}>
       <button
         disabled={!hasReservation && (!isBookingOpen || isClassFull)}
-        className={`booking-button ${cancelClass}`}
+        className={`cta-button booking-button ${cancelClass}`}
       >
         {buttonText}
       </button>

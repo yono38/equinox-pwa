@@ -4,7 +4,6 @@ import fetch from 'isomorphic-fetch';
 
 import {
 	getIsLoading,
-	getIsFailed,
 	getClassIds,
 } from '../selectors/classes';
 

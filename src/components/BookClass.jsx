@@ -17,7 +17,6 @@ class BookClass extends Component {
     const { classItem, isLoading, isFailed, bikes, router } = this.props;
     const classId = router.params.classId;
     const hasReservation = classItem && classItem.status ? classItem.status.hasReservation : false;
-    console.log(hasReservation, classId, isLoading, isFailed, bikes)
 
     if (!hasReservation && classId && !isLoading && !isFailed && isEmpty(bikes)) {
       this.props.initBikeList(classId);
@@ -27,7 +26,6 @@ class BookClass extends Component {
   render() {
     const {
       isLoading,
-      isFailed,
       bikes,
       classItem,
       cancelBike,
@@ -98,6 +96,13 @@ BookClass.propTypes = {
   isFailed: PropTypes.bool,
   bikes: PropTypes.array,
   class: PropTypes.object
+};
+
+BookClass.defaultProps = {
+  isLoading: true,
+  isFailed: false,
+  bikes: [],
+  class: {}
 };
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import './ClassTile.css';
 import BookingButton from './BookingButton';
+import CalendarButton from './CalendarButton';
 
 const ClassTile = props => {
   const {
@@ -10,13 +11,13 @@ const ClassTile = props => {
     displayTime,
     isCycling,
     hasReservation,
+    isOnCalendar,
     isClassFull,
     isBookable,
     isBookingOpen,
     reservableItemsLeft,
     timeLeftText
   } = props;
-  console.log(props);
 
   const spotsLeftText = isCycling ? 'bikes' : 'spots';
   let spotsLeftElem = (isBookingOpen && reservableItemsLeft > 0) ?
@@ -33,15 +34,17 @@ const ClassTile = props => {
     <div className="text-small">
       <span className="black-badge booked">Booked</span>
     </div> : null;
-  const bookingBtn = isBookable ?
-    <div className="card-cta">
+  const ctaBtn = isBookable && isBookingOpen ?
       <BookingButton
         classId={classId}
         hasReservation={hasReservation}
         isClassFull={isClassFull}
         isBookingOpen={isBookingOpen}
-      />
-    </div> : null;
+      /> :
+      <CalendarButton
+        classId={classId}
+        isOnCalendar={isOnCalendar}
+      />;
 
   return (
     <div className="class-tile card flex">
@@ -53,7 +56,9 @@ const ClassTile = props => {
         <p className="label color-grey">{displayTime}</p>
         {bookedBadge}
       </div>
-      { bookingBtn }
+      <div className="card-cta">
+        { ctaBtn }
+      </div>
     </div>
   )
 }

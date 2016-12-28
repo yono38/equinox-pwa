@@ -107,6 +107,20 @@ body {
    text-align: left;
 }
 
+.cta-button {
+  letter-spacing: initial;
+  border: 3px solid black;
+  font-size: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 110px;
+  height: 65px;
+}
+
+.cta-button.cancel {
+  background-color: rgb(26, 236, 169);
+}
+
 .loading div {
   display: block;
   margin: 100px auto 0;

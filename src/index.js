@@ -5,19 +5,20 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import classReducer from './reducers';
+import moduleReducers from './reducers';
 import { getAuthToken } from './utils';
 
 import Home from './Home';
 import ClassListApp from './components/ClassListApp';
 import BookClass from './components/BookClass';
 import Login from './components/Login';
+import Calendar from './components/Calendar';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   combineReducers({
-    modules: classReducer,
+    modules: moduleReducers,
     routing: routerReducer
   }),
   composeEnhancers(
@@ -28,8 +29,6 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store)
 
 function requireAuth(nextState, replaceState) {
-  console.log('yo!')
-  console.log(nextState)
   if (!getAuthToken()) {
     replaceState('/login');
   }
@@ -42,6 +41,7 @@ render((
       <Route path="/login" component={Login} />
       <Route path="/classes" component={ClassListApp} onEnter={requireAuth} />
       <Route path="/classes/:classId" component={BookClass} onEnter={requireAuth} />
+      <Route path="/calendar" component={Calendar} onEnter={requireAuth} />
     </Router>
   </Provider>
 ), document.getElementById('root'))

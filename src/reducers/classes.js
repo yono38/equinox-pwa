@@ -10,6 +10,11 @@ import {
   SELECT_DAY
 } from '../actions/classes';
 
+import {
+  ADD_TO_CALENDAR,
+  REMOVE_FROM_CALENDAR
+} from '../actions/calendar';
+
 const initialState = fromJS({
   list: {},
   classesByDay: {},
@@ -19,6 +24,8 @@ const initialState = fromJS({
 });
 
 export default function(state = initialState, action) {
+  // Need to convert classId from int to string for immutable key
+  const classId = action.classId ? action.classId.toString() : '';
   switch(action.type) {
     case CLASSES_REQUEST: {
       if(!action.startDate) {
@@ -45,16 +52,24 @@ export default function(state = initialState, action) {
 
     case BOOK_CLASS_SUCCESS: {
       return state
-        .setIn(['list', action.classId, 'status', 'localId'], action.bikeName)
-        .setIn(['list', action.classId, 'status', 'hasReservation'], true);
+        .setIn(['list', classId, 'status', 'localId'], action.bikeName)
+        .setIn(['list', classId, 'status', 'hasReservation'], true);
     }
 
     case CANCEL_CLASS_SUCCESS:
       return state
-        .setIn(['list', action.classId, 'status'], fromJS(action.reservationStatus));
+        .setIn(['list', classId, 'status'], fromJS(action.reservationStatus));
 
     case SELECT_DAY:
       return state.set('selectedDay', action.startDate);
+
+    // Update Classes to reflect current calendar status
+    case ADD_TO_CALENDAR: {
+      return state.setIn(['list', classId, 'isOnCalendar'], true);
+    }
+
+    case REMOVE_FROM_CALENDAR:
+      return state.setIn(['list', classId, 'isOnCalendar'], false);
 
     default:
       return state;

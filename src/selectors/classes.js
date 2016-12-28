@@ -57,6 +57,7 @@ export const getMappedClasses = createSelector(
         hasReservation: classItem.status.hasReservation,
         isBookable: classItem.isBookingRequired,
         isBookingOpen: classItem.status.isWithinReservationPeriod,
+        isOnCalendar: classItem.isOnCalendar,
         isClassFull: classItem.status.isClassFull,
         isCycling: classItem.category === 'Cycling',
         name: classItem.name,

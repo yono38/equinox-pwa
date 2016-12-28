@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 class ClassSummary extends Component {
   render() {
@@ -13,10 +14,10 @@ class ClassSummary extends Component {
     <div className="card">
       <div className="card-header">
         <h2 className="color-lightgrey">Up Next</h2>
-        <a href="#" className="color-teal">
+        <Link to="/calendar" className="color-teal">
           View Calendar{' '}
           <span className="icon-horizontal-arrow" />
-        </a>
+        </Link>
       </div>
       <div className="Home-up-next-body card-body">
         <h3>{classItem.name}</h3>

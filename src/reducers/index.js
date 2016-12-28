@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import bikes from './bikes';
-import classes from './classes';
+import calendar from './calendar';
 import checkins from './checkins';
+import classes from './classes';
 
-export default combineReducers({bikes, classes, checkins});
+export default combineReducers({ bikes, calendar, checkins, classes });

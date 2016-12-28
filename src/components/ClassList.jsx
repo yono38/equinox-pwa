@@ -15,8 +15,7 @@ class ClassList extends Component {
   }
 
   render() {
-    // const { isLoading } = this.props;
-    const isLoading = true;
+    const { isLoading } = this.props;
     const classes = sortBy(this.props.classes, classItem => classItem.startDate)
       .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
     return (
@@ -52,7 +51,8 @@ ClassList.propTypes = {
 ClassList.defaultProps = {
   headerTitle: 'Class List',
   selectedDay: moment().format('YYYY-MM-DD'),
-  onDaySelect: () => {}
+  onDaySelect: () => {},
+  isLoading: true
 };
 
 export default ClassList;

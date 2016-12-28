@@ -1,0 +1,50 @@
+.calendar .empty-cal-cta {
+  background: #7D888E;
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1.1px;
+  line-height: 18px;
+  text-align: center;
+}
+.calendar .empty-cal-cta a {
+  color: white;
+  padding: 0 4px;
+}
+.calendar .day-container {
+  background: white;
+  color: black;
+  display: flex;
+  border-bottom: 1px dotted #e0e0e0;
+  text-align: center;
+}
+.calendar .day-container div {
+  padding: 14px 0;
+}
+.calendar .day-container .day-label {
+  width: 40px;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  align-self: center;
+}
+.calendar .day-container .event-container {
+  padding: 19px 23px;
+  border-left: 1px solid #e0e0e0;
+}
+.calendar .day-container .event-container .event-info {
+  text-align: left;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+.calendar .day-container .event-info h2, p {
+  margin: 0;
+  letter-spacing: 1.25px;
+}
+.calendar .day-container .event-info h2 {
+  font-size: 14px;
+}
+.calendar .day-container .event-info p {
+  font-size: 12px;
+}
