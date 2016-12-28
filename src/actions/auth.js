@@ -27,7 +27,8 @@ export const login = (auth, replace = () => {}) => {
 export const logout = (replace) => {
   return (dispatch, getState) => {
     dispatch({ type: LOGOUT });
-    window.localStorage.removeItem('auth');
+    localStorage.removeItem('auth');
+    localStorage.removeItem('calEvents');
     replace('/login');
   }
 };

@@ -9,7 +9,9 @@ import {
 } from '../actions/calendar';
 
 const initialState = fromJS({
-  events: {},
+  events: localStorage.hasItem('calEvents') ?
+    JSON.parse(localStorage.getItem('calEvents')) : {},
+  fromCache: localStorage.hasItem('calEvents'),
   isLoading: false,
   isError: false
 });
@@ -20,12 +22,13 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case CALENDAR_REQUEST: {
       return state
-        .set('events', fromJS({}))
         .set('isLoading', true)
         .set('isError', false);
     }
     case CALENDAR_SUCCESS: {
       const eventsById = keyBy(action.events, ev => ev.classInstanceId);
+      // Add to local cache
+      localStorage.setItem('calEvents', JSON.stringify(eventsById));
       return state
         .set('events', fromJS(eventsById))
         .set('isLoading', false);
@@ -35,10 +38,18 @@ export default function(state = initialState, action) {
         .set('isError', true)
         .set('isLoading', false);
     }
-    case ADD_TO_CALENDAR:
-      return state.setIn(['events', classId], fromJS(action.eventItem))
-    case REMOVE_FROM_CALENDAR:
-      return state.deleteIn(['events', classId]);
+    case ADD_TO_CALENDAR: {
+      const newState = state.setIn(['events', classId], fromJS(action.eventItem));
+      // Update Cache
+      localStorage.setItem('calEvents', JSON.stringify(newState.get('events').toJS()));
+      return newState;
+    }
+    case REMOVE_FROM_CALENDAR: {
+      const newState =  state.deleteIn(['events', classId]);
+      // Update Cache
+      localStorage.setItem('calEvents', JSON.stringify(newState.get('events').toJS()));
+      return newState;
+    }
     default:
       return state;
   }

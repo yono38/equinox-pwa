@@ -5,18 +5,23 @@ import Loader from 'react-loading';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 
-import { getIsLoading, getEventsByIsoWeekday } from '../selectors/calendar';
+import {
+  getIsLoading,
+  getEventsByIsoWeekday,
+  getIsFromCache
+} from '../selectors/calendar';
 import { loadCalendar } from '../actions/calendar';
 
 import './Calendar.css';
 
 class Calendar extends Component {
   componentDidMount() {
-    const { isLoading, eventsByDay, initCalendar } = this.props;
-    if (!isLoading && isEmpty(eventsByDay)) {
+    const { isLoading, eventsByDay, initCalendar, isFromCache } = this.props;
+    if (!isLoading && (isEmpty(eventsByDay) || isFromCache) {
       initCalendar();
     }
   }
+
   render() {
     const { isLoading, eventsByDay } = this.props;
     console.log(eventsByDay);
@@ -75,20 +80,23 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  isLoading: PropTypes.bool,
   eventsByDay: PropTypes.object,
-  initCalendar: PropTypes.func
+  isFromCache: PropTypes.bool,
+  initCalendar: PropTypes.func,
+  isLoading: PropTypes.bool
 };
 
 Calendar.defaultProps = {
-  isLoading: true,
   eventsByDay: {},
-  initCalendar: () => {}
+  initCalendar: () => {},
+  isFromCache: false,
+  isLoading: true
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isLoading: getIsLoading(state),
-  eventsByDay: getEventsByIsoWeekday(state)
+  eventsByDay: getEventsByIsoWeekday(state),
+  isFromCache: getIsFromCache(state),
+  isLoading: getIsLoading(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

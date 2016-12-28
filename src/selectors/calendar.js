@@ -7,6 +7,11 @@ import moment from 'moment';
 
 const getCalendarModuleState = (state) => state.modules.calendar;
 
+export const getIsFromCache = createSelector(
+  [getCalendarModuleState],
+  (module) => module.get('fromCache')
+);
+
 export const getIsLoading = createSelector(
   [getCalendarModuleState],
   (module) => module.get('isLoading')
