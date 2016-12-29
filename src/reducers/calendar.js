@@ -9,9 +9,9 @@ import {
 } from '../actions/calendar';
 
 const initialState = fromJS({
-  events: localStorage.hasItem('calEvents') ?
+  events: localStorage.getItem('calEvents') ?
     JSON.parse(localStorage.getItem('calEvents')) : {},
-  fromCache: localStorage.hasItem('calEvents'),
+  fromCache: !!localStorage.getItem('calEvents'),
   isLoading: false,
   isError: false
 });

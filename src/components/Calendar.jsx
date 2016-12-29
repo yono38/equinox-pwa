@@ -11,13 +11,14 @@ import {
   getIsFromCache
 } from '../selectors/calendar';
 import { loadCalendar } from '../actions/calendar';
+import parseClassInfo from '../utils/parseClassInfo';
 
 import './Calendar.css';
 
 class Calendar extends Component {
   componentDidMount() {
     const { isLoading, eventsByDay, initCalendar, isFromCache } = this.props;
-    if (!isLoading && (isEmpty(eventsByDay) || isFromCache) {
+    if (!isLoading && (isEmpty(eventsByDay) || isFromCache)) {
       initCalendar();
     }
   }
@@ -28,20 +29,16 @@ class Calendar extends Component {
     const isoDays = [...Array(7).keys()];
     const calEvents = isoDays.map(day => {
       let eventInfoElem = null;
-      const eventItem = eventsByDay[day];
-      if (eventItem) {
-        const instructor = eventItem.instructors[0].instructor;
-        const startTime = moment(eventItem.startDate).format('h:mm A');
-        const endTime = moment(eventItem.endDate).format('h:mm A');
+      const eventItem = parseClassInfo(eventsByDay[day]);
+      if (!isEmpty(eventItem)) {
         eventInfoElem = (
           <div className="event-info">
             <h2>{eventItem.name}</h2>
-            <p>{`${instructor.firstName} ${instructor.lastName}`}</p>
-            <p>{`${startTime} - ${endTime}`}</p>
+            <p>{`${eventItem.instructor.firstName} ${eventItem.instructor.lastName}`}</p>
+            <p>{`${eventItem.startTime} - ${eventItem.endTime}`}</p>
           </div>
         );
       }
-
       return (
         <div key={`day-${day}`} className="day-container">
           <div className="day-label">
@@ -67,7 +64,7 @@ class Calendar extends Component {
           Calendar
           <Link className="menu icon-left-arrow" to="/" />
         </div>
-        { isLoading &&
+        { isLoading && isEmpty(eventsByDay) &&
           <div className="loading">
             <Loader type="bubbles" />
           </div>

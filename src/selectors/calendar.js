@@ -35,3 +35,16 @@ export const getEventsByIsoWeekday = createSelector(
       (ev) => moment(ev.startDate).isoWeekday()
     )
 );
+
+export const getUpcomingEvent = createSelector(
+  [getEventsByIsoWeekday],
+  (eventsByDay) => {
+    const isoToday = moment().isoWeekday();
+    for (let i = isoToday; i < 6; i++) {
+      if (eventsByDay[i]) {
+        return eventsByDay[i];
+      }
+    }
+    return null;
+  }
+);
