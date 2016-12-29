@@ -41,8 +41,11 @@ class ClassSummary extends Component {
       classBody = (
         <div className="Home-up-next-body card-body">
           <h3>{classItem.name}</h3>
-          <p className="color-grey">{classItem.instructor}</p>
+          <p className="color-grey">
+            {`${classItem.instructor.firstName} ${classItem.instructor.lastName}`}
+          </p>
           <p className="color-grey">{classItem.startTime} - {classItem.endTime}</p>
+          <p className="color-grey">{classItem.displayWeekday}</p>
           {bookedStatus}
         </div>
       );

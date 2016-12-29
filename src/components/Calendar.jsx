@@ -25,7 +25,6 @@ class Calendar extends Component {
 
   render() {
     const { isLoading, eventsByDay } = this.props;
-    console.log(eventsByDay);
     const isoDays = [...Array(7).keys()];
     const calEvents = isoDays.map(day => {
       let eventInfoElem = null;

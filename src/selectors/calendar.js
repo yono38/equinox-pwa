@@ -3,6 +3,7 @@
 // But would need to ensure class data is loaded / loadable
 import { createSelector } from 'reselect';
 import keyBy from 'lodash/keyBy';
+import values from 'lodash/values';
 import moment from 'moment';
 
 const getCalendarModuleState = (state) => state.modules.calendar;
@@ -24,16 +25,17 @@ export const getIsFailed = createSelector(
 
 export const getEvents = createSelector(
   [getCalendarModuleState],
-  (module) => module.get('events').toJS()
+  (module) => module.get('events').toJS() || {}
 );
 
 export const getEventsByIsoWeekday = createSelector(
   [getEvents],
   (events) =>
     keyBy(
-      Object.values(events),
+      // Object.values not yet fully supported
+      values(events),
       (ev) => moment(ev.startDate).isoWeekday()
-    )
+    ) || []
 );
 
 export const getUpcomingEvent = createSelector(

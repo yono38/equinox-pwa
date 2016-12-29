@@ -1,0 +1,17 @@
+.recent-activity-body {
+  background: #efefef;
+  text-transform: uppercase;
+  padding: 20px;
+}
+.recent-activity-body h2 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+}
+.recent-activity-body .calories {
+  float: right;
+  font-weight: bold;
+}
+.recent-activity-body .empty-workouts {
+  text-align: center;
+}

@@ -42,10 +42,10 @@ class Home extends Component {
               <div className="icon-book-a-class color-teal" />
               <h2 className="text-small">Book a class</h2>
             </Link>
-            <div className="Home-action">
+            <Link to="/activity" className="Home-action">
               <div className="icon-heart color-teal" />
               <h2 className="text-small">View Activity</h2>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -54,10 +54,10 @@ class Home extends Component {
         <div className="card">
           <div className="card-header">
             <h2 className="color-lightgrey">Recent Activity</h2>
-            <a href="#" className="color-teal">
+            <Link to="/activity" className="color-teal">
               See All Activity{' '}
               <span className="icon-horizontal-arrow" />
-            </a>
+            </Link>
           </div>
           <div className="card-body">
             <h3>Vinyasa Yoga</h3>
