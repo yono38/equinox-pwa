@@ -1,5 +1,6 @@
 import { API_ROOT_URL } from '../constants';
 import { getIsLoading } from '../selectors/calendar';
+import { getClass } from '../selectors/classes';
 import { getAuthToken } from '../utils';
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
@@ -61,8 +62,27 @@ const removeSuccess = (classId, eventItem) => ({
 	eventItem
 });
 
+export const setBookingAlert = (classItem = {}) => {
+	console.log('wow!', classItem)
+	// ONE WAY COMMUNICATION
+	console.log('Waiting for serviceWorker registration...');
+	if ('serviceWorker' in navigator &&
+		navigator.serviceWorker.controller) {
+			console.log("Sending to service worker");
+			const delay = moment(classItem.reservationStartDate).diff(moment());
+			navigator.serviceWorker.controller.postMessage({
+					command: "addNotification",
+					name: classItem.name || "Booking Has Opened",
+					alertTime: classItem.reservationStartDate,
+					delay
+			});
+	} else {
+		console.log('Service Worker not ready.');
+	}
+}
+
 export const addToCalendar = (classId) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     fetch(`${API_ROOT_URL}/calendar/${classId}`, {
 				method: 'POST',
         headers: {
@@ -70,7 +90,15 @@ export const addToCalendar = (classId) => {
         }
       })
 			.then(response => response.json())
-      .then((response) => dispatch(addSuccess(classId, response)))
+      .then((response) => {
+				dispatch(addSuccess(classId, response));
+				const state = getState();
+				if (state.modules.settings.applicationSettings.bookAlert === true) {
+					const classItem = getClass(state, { classId });
+					setBookingAlert(classItem);
+				}
+				return response;
+			})
   };
 };
 

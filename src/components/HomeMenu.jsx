@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 export default class HomeMenu extends Component {
   constructor(props) {
@@ -19,9 +20,14 @@ export default class HomeMenu extends Component {
       : (
         <div className="menu">
           <div className="icon-dropdown" onClick={onClick} />
-          <div className="dropdown">
-            <a onClick={this.props.logoutOnClick}>Logout</a>
-          </div>
+          <ul className="dropdown">
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+            <li>
+              <a onClick={this.props.logoutOnClick}>Logout</a>
+            </li>
+          </ul>
         </div>
       )
   }

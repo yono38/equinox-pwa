@@ -35,11 +35,15 @@
       To create a production bundle, use `npm run build`.
     -->
     <script>
+      var swReg;
       if('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker
-            .register('/service-worker.js')
-            .then(function() { console.log("Service Worker Registered"); });
+            .register('./sw.js')
+            .then(function(registration) {
+              console.log("Service Worker Registered");
+              swReg = registration;
+            });
         });
       }
     </script>

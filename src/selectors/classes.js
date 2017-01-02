@@ -61,6 +61,7 @@ export const getMappedClasses = createSelector(
         isClassFull: classItem.status.isClassFull,
         isCycling: classItem.category === 'Cycling',
         name: classItem.name,
+        reservationStartDate: classItem.status.reservationStartDate,
         reservableItemsLeft: classItem.status.reservableItemsLeft,
         startDate: classItem.startDate,
         timeLeftText: classItem.status.timeLeftText,

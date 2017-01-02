@@ -32,6 +32,14 @@ body {
   padding: 5px 25px 50px 25px;
 }
 
+.header ul.dropdown {
+  margin: 0;
+}
+
+.header ul.dropdown li {
+  padding: 5px 0;
+}
+
 .header .dropdown a {
   color: black;
   font-weight: bold;
