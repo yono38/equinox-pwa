@@ -70,6 +70,6 @@ export const getMappedClasses = createSelector(
 )
 
 export const getClass = (state, ownProps) => {
-  const classItem = state.modules.classes.getIn(['list', ownProps.classId]);
+  const classItem = state.modules.classes.getIn(['list', String(ownProps.classId)]);
   return classItem ? classItem.toJS() : {};
 };

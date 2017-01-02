@@ -1,6 +1,7 @@
 import { API_ROOT_URL } from '../constants';
 import { getIsLoading } from '../selectors/calendar';
 import { getClass } from '../selectors/classes';
+import { getBookingAlertSettings } from '../selectors/settings';
 import { getAuthToken } from '../utils';
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
@@ -62,18 +63,16 @@ const removeSuccess = (classId, eventItem) => ({
 	eventItem
 });
 
-export const setBookingAlert = (classItem = {}) => {
-	console.log('wow!', classItem)
-	// ONE WAY COMMUNICATION
+export const setBookingAlert = (classItem = { status: {} }) => {
 	console.log('Waiting for serviceWorker registration...');
 	if ('serviceWorker' in navigator &&
 		navigator.serviceWorker.controller) {
 			console.log("Sending to service worker");
-			const delay = moment(classItem.reservationStartDate).diff(moment());
+			const delay = moment(classItem.status.reservationStartDate).diff(moment());
 			navigator.serviceWorker.controller.postMessage({
 					command: "addNotification",
 					name: classItem.name || "Booking Has Opened",
-					alertTime: classItem.reservationStartDate,
+					alertTime: classItem.status.reservationStartDate,
 					delay
 			});
 	} else {
@@ -93,9 +92,12 @@ export const addToCalendar = (classId) => {
       .then((response) => {
 				dispatch(addSuccess(classId, response));
 				const state = getState();
-				if (state.modules.settings.applicationSettings.bookAlert === true) {
+				// If booking reminders enabled, add booking alertTime if bookable
+				if (getBookingAlertSettings(state)) {
 					const classItem = getClass(state, { classId });
-					setBookingAlert(classItem);
+					if (classItem.isBookingRequired) {
+						setBookingAlert(classItem);
+					}
 				}
 				return response;
 			})

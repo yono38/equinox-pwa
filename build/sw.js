@@ -23,7 +23,7 @@ self.addEventListener('message', function(event) {
       const bookAlert = delayFunction(delayTime).then(() => {
         console.log('[Service Worker] Show Notification')
         const title = data.name || 'Test Notification';
-        self.registration.showNotification(title, {
+        return self.registration.showNotification(title, {
           body: 'Spots are open to book for this class',
           icon: './android-chrome-192x192.png',
           vibrate: [200, 100, 200],
@@ -37,6 +37,7 @@ self.addEventListener('message', function(event) {
           runTime: data.alertTime
         }
       });
+      event.waitUntil(bookAlert);
     }
 });
 

@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 
 import moment from 'moment';
 import { setBookingAlert } from '../actions/calendar';
+import {
+  getBookingAlertSettings,
+  getNotificationSettings
+} from '../selectors/settings';
 
 import {
   enableBookingReminder,
@@ -17,7 +21,6 @@ const Settings = (props) => {
     notificationPermission,
     bookingAlertPermission,
   } = props;
-  console.log(props);
   let ctaBtn;
   let testNotification = null;
   const disabledBtnStates = ['denied', 'unavailable'];
@@ -41,7 +44,9 @@ const Settings = (props) => {
     const onTestClick = () => {
       const mockData = {
         name: 'Some Awesome Class',
-        reservationStartDate: moment().add(5, 'seconds').toISOString()
+        status: {
+          reservationStartDate: moment().add(5, 'seconds').toISOString()
+        }
       };
       setBookingAlert(mockData);
     }
@@ -84,7 +89,7 @@ const Settings = (props) => {
 };
 
 Settings.propTypes = {
-  notificationPermission: PropTypes.bool,
+  notificationPermission: PropTypes.string,
   bookingAlertPermission: PropTypes.bool,
   onEnableClick: PropTypes.func,
   onDisableClick: PropTypes.func
@@ -96,15 +101,13 @@ Settings.defaultProps = {
 };
 
 const mapStateToProps = (state) =>({
-  notificationPermission: state.modules.settings.get('notifications'),
-  bookingAlertPermission: state.modules.settings.getIn(['application', 'bookingAlert'])
+  notificationPermission: getNotificationSettings(state),
+  bookingAlertPermission: getBookingAlertSettings(state)
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onEnableClick: () => dispatch(enableBookingReminder()),
-    onDisableClick: () => dispatch(disableBookingReminder())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  onEnableClick: () => dispatch(enableBookingReminder()),
+  onDisableClick: () => dispatch(disableBookingReminder())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
