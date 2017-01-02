@@ -26,7 +26,7 @@ self.addEventListener('message', function(event) {
         self.registration.showNotification(title, {
           body: 'Spots are open to book for this class',
           icon: './android-chrome-192x192.png',
-          vibrate: [200, 100, 200, 100, 200, 100, 200],
+          vibrate: [200, 100, 200],
           tag: 'vibration-sample'
         });
       });
