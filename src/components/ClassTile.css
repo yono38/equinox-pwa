@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.class-tile .card-cta {
+  margin-left: 15px;
+}
+
 .class-tile .label {
   font-size: 13px;
 }

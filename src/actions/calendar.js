@@ -64,17 +64,21 @@ const removeSuccess = (classId, eventItem) => ({
 });
 
 export const setBookingAlert = (classItem = { status: {} }) => {
-	console.log('Waiting for serviceWorker registration...');
+	console.log('Preparing to set booking alert...');
 	if ('serviceWorker' in navigator &&
 		navigator.serviceWorker.controller) {
-			console.log("Sending to service worker");
 			const delay = moment(classItem.status.reservationStartDate).diff(moment());
-			navigator.serviceWorker.controller.postMessage({
-					command: "addNotification",
-					name: classItem.name || "Booking Has Opened",
-					alertTime: classItem.status.reservationStartDate,
-					delay
-			});
+			if (delay > 0) {
+				console.log("Sending to service worker");
+				navigator.serviceWorker.controller.postMessage({
+						command: "addNotification",
+						name: classItem.name || "Booking Has Opened",
+						alertTime: classItem.status.reservationStartDate,
+						delay
+				});
+			} else {
+				console.log('Class booking has already opened, no alert needed');
+			}
 	} else {
 		console.log('Service Worker not ready.');
 	}

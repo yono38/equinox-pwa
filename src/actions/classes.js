@@ -7,6 +7,11 @@ import {
 	getClassIds,
 } from '../selectors/classes';
 
+import {
+	addToCalendar,
+	removeFromCalendar
+} from '../actions/calendar';
+
 export const CLASSES_REQUEST = 'classList/CLASSES_REQUEST'
 export const CLASSES_SUCCESS = 'classList/CLASSES_SUCCESS'
 export const CLASSES_FAILURE = 'classList/CLASSES_FAILURE'
@@ -74,7 +79,6 @@ export const loadClasses = (startDate) => {
 
 export const bookBike = (classId, bikeId, bikeName) => {
 	return (dispatch, getState) => {
-		console.log('I have a bikeId: ', bikeId)
 		fetch(`${API_ROOT_URL}/classes/${classId}`, {
 				method: 'POST',
 				body: JSON.stringify({
@@ -94,6 +98,7 @@ export const bookBike = (classId, bikeId, bikeName) => {
 						classId,
 						bikeName
 					});
+					dispatch(addToCalendar(classId));
 				} else {
 					const errorMessage = (response.error && response.error[0]) ?
 						response.error[0].userFriendlyDescription : 'Failed to book class';
@@ -123,6 +128,7 @@ export const cancelBike = (classId) => {
 						reservationStatus: response.reservationStatus,
 						classId
 					});
+					dispatch(removeFromCalendar(classId));
 				} else {
 					dispatch({
 						type: CANCEL_CLASS_FAILURE,
