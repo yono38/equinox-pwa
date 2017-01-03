@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["index.html","b4b4277e645e22f371a6840d300d5a4a"],["manifest.json","6048f0ba3f4c89d44ecd5772b4182477"],["static/css/main.28d348cd.css","6dfe09e840844a7fd395cc28eacd7230"],["static/js/main.025d51d5.js","553ebbd79d37df42e4a8d93ab990a621"],["static/media/equinox-logo.b5fd2362.png","b5fd2362df18bae25bc4557787dc0fcd"],["static/media/icomoon.7ffe3f47.ttf","7ffe3f47db566bde5547a57a1f3fb1f7"],["static/media/icomoon.84ea09bb.woff","84ea09bb2ab88ff334b8715aba1e1cc7"],["static/media/icomoon.c5b885dc.svg","c5b885dc6d9e82395f30980090eb94f3"],["static/media/icomoon.d2016e7e.eot","d2016e7e1a5b6998e14b09a682572980"],["static/media/sprinter.9ba5a4c0.jpg","9ba5a4c04af7a3bb6039dd5a0b1a104a"]];
+var precacheConfig = [["index.html","85285c322fe31a3655942493254b6df3"],["manifest.json","6048f0ba3f4c89d44ecd5772b4182477"],["static/css/main.b884c811.css","061db4540452aecddb7282c649a9c134"],["static/js/main.f26cfb78.js","ca90d5324e24851da8d24db3ca0b7a10"],["static/media/equinox-logo.b5fd2362.png","b5fd2362df18bae25bc4557787dc0fcd"],["static/media/icomoon.7ffe3f47.ttf","7ffe3f47db566bde5547a57a1f3fb1f7"],["static/media/icomoon.84ea09bb.woff","84ea09bb2ab88ff334b8715aba1e1cc7"],["static/media/icomoon.c5b885dc.svg","c5b885dc6d9e82395f30980090eb94f3"],["static/media/icomoon.d2016e7e.eot","d2016e7e1a5b6998e14b09a682572980"],["static/media/sprinter.9ba5a4c0.jpg","9ba5a4c04af7a3bb6039dd5a0b1a104a"]];
 var cacheName = 'sw-precache-v2-sw-precache-' + (self.registration ? self.registration.scope : '');
 
 

@@ -9,7 +9,7 @@ import moduleReducers from './reducers';
 import { getAuthToken } from './utils';
 
 import Home from './Home';
-import ClassListApp from './components/ClassListApp';
+import ClassList from './components/ClassList';
 import BookClass from './components/BookClass';
 import Login from './components/Login';
 import Calendar from './components/Calendar';
@@ -41,7 +41,7 @@ render((
     <Router history={history}>
       <Route path="/" component={Home} onEnter={requireAuth} />
       <Route path="/login" component={Login} />
-      <Route path="/classes" component={ClassListApp} onEnter={requireAuth} />
+      <Route path="/classes" component={ClassList} onEnter={requireAuth} />
       <Route path="/classes/:classId" component={BookClass} onEnter={requireAuth} />
       <Route path="/calendar" component={Calendar} onEnter={requireAuth} />
       <Route path="/activity" component={Activity} onEnter={requireAuth} />

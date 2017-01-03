@@ -1,11 +1,20 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Loader from 'react-loading';
+import Swipeable from 'react-swipeable';
 import moment from 'moment';
 import sortBy from 'lodash/sortBy';
 
 import ClassTile from './ClassTile';
 import DayPicker from './DayPicker';
-import Loader from 'react-loading';
+import { loadClasses } from '../actions/classes';
+import {
+  getSelectedDay,
+  getIsLoading,
+  getIsFailed,
+  getMappedClasses
+} from '../selectors/classes';
 
 class ClassList extends Component {
   componentDidMount() {
@@ -14,10 +23,35 @@ class ClassList extends Component {
     }
   }
 
+  selectDayOnSwipe(direction) {
+    const selectedDayIdx = moment(this.props.selectedDay).day();
+    // TODO handle moving to previous/next week
+    if (direction === 'prev' && selectedDayIdx === 0
+      || direction === 'next' && selectedDayIdx === 6) {
+      // If already on edge of week, do nothing
+      return;
+    }
+    const momentOperation = direction ===  'prev' ? 'subtract' : 'add';
+    const newSelectedDay = moment(this.props.selectedDay)[momentOperation](1, 'day')
+      .format('YYYY-MM-DD');
+    this.props.initClassList(newSelectedDay);
+  }
+
   render() {
     const { isLoading } = this.props;
     const classes = sortBy(this.props.classes, classItem => classItem.startDate)
       .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
+    const onSwipedRight = () => this.selectDayOnSwipe('prev');
+    const onSwipedLeft = () => this.selectDayOnSwipe('next');
+    const classList = (
+      <Swipeable
+        onSwipedRight={onSwipedRight}
+        onSwipedLeft={onSwipedLeft}
+        className="class-tile-list"
+      >
+        {classes}
+      </Swipeable>
+    )
     return (
       <div>
         <div className="header">
@@ -33,7 +67,7 @@ class ClassList extends Component {
             <Loader type="bubbles" />
           </div>
         }
-        { !isLoading && classes }
+        { !isLoading && classList }
       </div>
     );
   }
@@ -55,4 +89,21 @@ ClassList.defaultProps = {
   isLoading: true
 };
 
-export default ClassList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    headerTitle: ownProps.bookableOnly ? 'Book a Class' : 'Class List',
+    classes: getMappedClasses(state, ownProps),
+    selectedDay: getSelectedDay(state),
+    isLoading: getIsLoading(state),
+    // TODO use this
+    isFailed: getIsFailed(state)
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    initClassList: (startDate) => dispatch(loadClasses(startDate))
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ClassList);

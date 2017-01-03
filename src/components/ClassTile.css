@@ -1,3 +1,8 @@
+/* Make small lists swipable */
+.class-tile-list {
+  height: 100vh;
+}
+
 .class-tile {
   display: flex;
   justify-content: space-between;
