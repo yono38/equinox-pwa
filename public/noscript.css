@@ -1,0 +1,15 @@
+html {
+  height: 100%;
+  background: black;
+  color: white;
+}
+
+body {
+  padding: 20px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+img.noscript-logo {
+  width: 75px;
+}

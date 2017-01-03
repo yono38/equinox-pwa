@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import moment from 'moment';
+
 import { setBookingAlert } from '../actions/calendar';
 import {
   getBookingAlertSettings,
   getNotificationSettings
 } from '../selectors/settings';
-
 import {
   enableBookingReminder,
   disableBookingReminder
 } from '../actions/settings';
+import Header from './Header';
 
 const Settings = (props) => {
   const {
@@ -28,7 +28,7 @@ const Settings = (props) => {
     && navigator.serviceWorker.controller !== null;
   if (
     !isServiceWorkerReady
-     || disabledBtnStates.includes(props.notificationPermission)
+     || disabledBtnStates.includes(notificationPermission)
   ) {
     ctaBtn = (
       <button disabled className="cta-button disabled">
@@ -71,10 +71,7 @@ const Settings = (props) => {
   }
   return (
     <div className="settings">
-      <div className="header">
-        Settings
-        <Link className="menu icon-left-arrow" to="/" />
-      </div>
+      <Header title="Settings" />
       <div className="settings-tile card flex">
         <div className="card-header">
           <h3>Remind me when class booking opens</h3>

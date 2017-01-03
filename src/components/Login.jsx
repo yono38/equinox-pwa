@@ -29,15 +29,19 @@ class Login extends Component {
         </div>
         <h1>Welcome</h1>
         <div className="login-form">
+          <label htmlFor="email">Email</label>
           <input
             placeholder="Enter Email"
+            name="email"
             ref="username"
             type="text"
             value={this.state.username}
             onChange={handleInput('username')}
           />
+          <label htmlFor="password">Password</label>
           <input
             placeholder="Enter Password"
+            name="password"
             ref="password"
             type="password"
             value={this.state.password}

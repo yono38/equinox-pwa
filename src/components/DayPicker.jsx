@@ -13,7 +13,6 @@ const DayPicker = props => {
          key={`day-${idx}`}
       >
         <a
-         href="#"
          className={idx === selectedDayIdx ? 'active': ''}
          onClick={props.onDaySelect.bind(null, formattedDay)}
          >

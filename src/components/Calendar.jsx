@@ -12,6 +12,7 @@ import {
 } from '../selectors/calendar';
 import { loadCalendar } from '../actions/calendar';
 import parseClassInfo from '../utils/parseClassInfo';
+import Header from './Header';
 
 import './Calendar.css';
 
@@ -59,10 +60,7 @@ class Calendar extends Component {
 
     return (
       <div className="calendar">
-        <div className="header">
-          Calendar
-          <Link className="menu icon-left-arrow" to="/" />
-        </div>
+        <Header title="Calendar" />
         { isLoading && isEmpty(eventsByDay) &&
           <div className="loading">
             <Loader type="bubbles" />

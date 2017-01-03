@@ -1,16 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import Loader from 'react-loading';
 
-import logo from '../equinox-logo.png';
-import './BookClass.css';
-
+import Header from './Header';
 import { getClass } from '../selectors/classes';
 import { getIsLoading, getIsFailed, getBikes } from '../selectors/bikes';
 import { loadBikes } from '../actions/bikes';
 import { bookBike, cancelBike } from '../actions/classes';
 
-import Loader from 'react-loading';
+import './BookClass.css';
 
 class BookClass extends Component {
   componentDidMount() {
@@ -49,10 +48,7 @@ class BookClass extends Component {
 
     return (
       <div className="book-class-page">
-        <div className="header">
-          <a onClick={this.props.router.goBack} className="menu icon-left-arrow" />
-          <img src={logo} className="equinox-logo" alt="logo" />
-        </div>
+        <Header goBack={true} />
         { classInfoSection }
         { isLoading &&
           <div className="loading">
@@ -72,7 +68,7 @@ class BookClass extends Component {
             {bikes.map(bike => {
               const bikeOnClick = () => bookBike(classId, bike.id, bike.name);
               return (
-                <div onClick={bikeOnClick} className="bike-item card">
+                <div key={`bike-${bike.id}`} onClick={bikeOnClick} className="bike-item card">
                   Bike {bike.name}
                 </div>
               );

@@ -34,7 +34,7 @@ const ClassTile = props => {
     <div className="text-small">
       <span className="black-badge booked">Booked</span>
     </div> : null;
-  const ctaBtn = isBookable && isBookingOpen ?
+  const ctaBtn = (isBookable && isBookingOpen && !isOnCalendar) ?
       <BookingButton
         classId={classId}
         hasReservation={hasReservation}
@@ -72,17 +72,6 @@ ClassTile.propTypes = {
   reservableItemsLeft: PropTypes.number,
   hasReservation: PropTypes.bool,
   isClassFull: PropTypes.bool
-};
-
-ClassTile.defaultProps = {
-  name: 'The Pursuit: Burn',
-  instructor: 'Arnold Schwartenzegger',
-  displayTime: '06:30 AM - 07:20 AM',
-  isBookable: true,
-  isCycling: true,
-  reservableItemsLeft: 10,
-  hasReservation: false,
-  isClassFull: false
 };
 
 export default ClassTile;

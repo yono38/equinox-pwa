@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import moduleReducers from './reducers';
 import { getAuthToken } from './utils';
 
@@ -18,13 +18,14 @@ import Settings from './components/Settings';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const historyRouterMiddleware = routerMiddleware(browserHistory);
 const store = createStore(
   combineReducers({
     modules: moduleReducers,
     routing: routerReducer
   }),
   composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, historyRouterMiddleware)
   )
 );
 

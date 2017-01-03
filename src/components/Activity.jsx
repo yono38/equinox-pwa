@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import Loader from 'react-loading';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -10,6 +9,7 @@ import {
   getWorkouts
 } from '../selectors/workouts';
 import { loadWorkouts } from '../actions/workouts';
+import Header from './Header';
 
 import './Activity.css';
 
@@ -23,7 +23,6 @@ class Activity extends Component {
 
   render() {
     const { isLoading, workouts } = this.props;
-    console.log(workouts);
     const monthName = moment().format('MMMM');
     const workoutsElem = workouts.map((workout) => {
       const totalDistance = workout.totalDistance ?
@@ -50,10 +49,7 @@ class Activity extends Component {
 
     return (
       <div className="activity">
-        <div className="header">
-          Recent Activity
-          <Link className="menu icon-left-arrow" to="/" />
-        </div>
+        <Header title="Recent Activity" />
         { isLoading && isEmpty(workouts) &&
           <div className="loading">
             <Loader type="bubbles" />

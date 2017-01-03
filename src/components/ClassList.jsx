@@ -1,13 +1,14 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Loader from 'react-loading';
 import Swipeable from 'react-swipeable';
 import moment from 'moment';
 import sortBy from 'lodash/sortBy';
+import { push } from 'react-router-redux';
 
 import ClassTile from './ClassTile';
 import DayPicker from './DayPicker';
+import Header from './Header';
 import { loadClasses } from '../actions/classes';
 import {
   getSelectedDay,
@@ -19,15 +20,17 @@ import {
 class ClassList extends Component {
   componentDidMount() {
     if (this.props.initClassList && this.props.selectedDay) {
-      this.props.initClassList(this.props.selectedDay);
+      const selectedDay = this.props.location.query.day ?
+        this.props.location.query.day : this.props.selectedDay;
+      this.props.initClassList(selectedDay);
     }
   }
 
   selectDayOnSwipe(direction) {
     const selectedDayIdx = moment(this.props.selectedDay).day();
     // TODO handle moving to previous/next week
-    if (direction === 'prev' && selectedDayIdx === 0
-      || direction === 'next' && selectedDayIdx === 6) {
+    if ((direction === 'prev' && selectedDayIdx === 0)
+      || (direction === 'next' && selectedDayIdx === 6)) {
       // If already on edge of week, do nothing
       return;
     }
@@ -54,10 +57,7 @@ class ClassList extends Component {
     )
     return (
       <div>
-        <div className="header">
-          {this.props.headerTitle}
-          <Link className="menu icon-left-arrow" to="/" />
-        </div>
+        <Header title={this.props.headerTitle} />
         <DayPicker
           selectedDay={this.props.selectedDay}
           onDaySelect={this.props.initClassList}
@@ -102,7 +102,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    initClassList: (startDate) => dispatch(loadClasses(startDate))
+    initClassList: (startDate) => {
+      dispatch(loadClasses(startDate));
+      dispatch(push(`/classes?day=${startDate}`));
+    }
   }
 };
 

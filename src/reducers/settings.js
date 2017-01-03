@@ -6,13 +6,6 @@ import {
   SET_BOOKING_ALERT_PERMISSION
 } from '../actions/settings';
 
-const initialState = fromJS({
-  events: localStorage.getItem('calEvents') ?
-    JSON.parse(localStorage.getItem('calEvents')) : {},
-  fromCache: !!localStorage.getItem('calEvents'),
-  isLoading: false,
-  isError: false
-});
 const getInitialState = () => {
   const notificationsEnabled = window.Notification
     ? window.Notification.permission : 'unavailable';

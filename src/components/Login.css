@@ -8,6 +8,12 @@
   border-bottom: #a7a7a7 solid 1px;
 }
 
+.login-page label {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 .login-page h1 {
   font-weight: normal;
   font-size: 25px;

@@ -71,37 +71,6 @@ ClassSummary.propTypes = {
   isLoading: PropTypes.bool
 }
 
-ClassSummary.defaultProps = {
-  classItem: {
-     "name":"The Pursuit: Build",
-     "startDate":"2016-11-02T10:30:00Z",
-     "endDate":"2016-11-02T11:20:00Z",
-     "displayTime":"06:30 AM - 07:20 AM",
-     "timeSlot":"Morning",
-     "status":{
-        "isWithinReservationPeriod":true,
-        "isWithinCancelPeriod":true,
-        "isClassFull":true,
-        "totalReservableItems":0,
-        "reservableItemsLeft":0,
-        "hasReservation":true,
-        "localId":null,
-        "reservationStartTimeLeft":-66750,
-        "reservationEndTimeLeft":24748,
-        "reservationStartDaysLeft":0,
-        "reservationStartDate":"0001-01-01T00:00:00",
-        "timeLeftText":null,
-        "isBookingClosedClassPending":false
-     },
-     "id":5907151,
-     "facility":"Brookfield",
-     "instructor":"Shanda Woods",
-     "category":"Cycling",
-     "isBookingRequired":true
-  },
-  isLoading: false,
-}
-
 const mapStateToProps = (state, ownProps) => ({
   classItem: getUpcomingEvent(state),
   isFromCache: getIsFromCache(state),

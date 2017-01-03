@@ -55,7 +55,7 @@ CheckinSummary.propTypes = {
   isLoading: PropTypes.bool
 };
 
-CheckinSummary.propTypes = {
+CheckinSummary.defaultProps = {
   totals: {}
 };
 
