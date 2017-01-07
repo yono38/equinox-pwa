@@ -1,7 +1,16 @@
-.recent-activity-body {
+.activity {
+  min-height: 100vh;
   background: #efefef;
+}
+.activity .header {
+  background: black;
+}
+.recent-activity-body {
   text-transform: uppercase;
   padding: 20px;
+}
+.recent-activity-body .distance {
+  min-height: 18px;
 }
 .recent-activity-body h2 {
   text-align: center;
@@ -14,4 +23,7 @@
 }
 .recent-activity-body .empty-workouts {
   text-align: center;
+}
+.remove-activity {
+  float: right;
 }

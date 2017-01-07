@@ -4,11 +4,12 @@ import Loader from 'react-loading';
 import Swipeable from 'react-swipeable';
 import moment from 'moment';
 import sortBy from 'lodash/sortBy';
+import { Link } from 'react-router';
 import { push } from 'react-router-redux';
 
+import './ClassList.css';
 import ClassTile from './ClassTile';
 import DayPicker from './DayPicker';
-import Header from './Header';
 import { loadClasses } from '../actions/classes';
 import {
   getSelectedDay,
@@ -28,12 +29,6 @@ class ClassList extends Component {
 
   selectDayOnSwipe(direction) {
     const selectedDayIdx = moment(this.props.selectedDay).day();
-    // TODO handle moving to previous/next week
-    if ((direction === 'prev' && selectedDayIdx === 0)
-      || (direction === 'next' && selectedDayIdx === 6)) {
-      // If already on edge of week, do nothing
-      return;
-    }
     const momentOperation = direction ===  'prev' ? 'subtract' : 'add';
     const newSelectedDay = moment(this.props.selectedDay)[momentOperation](1, 'day')
       .format('YYYY-MM-DD');
@@ -41,7 +36,7 @@ class ClassList extends Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, selectedDay, onHeaderNext, onHeaderPrevious } = this.props;
     const classes = sortBy(this.props.classes, classItem => classItem.startDate)
       .map((classItem, idx) => <ClassTile key={`class-${idx}`} {...classItem} />);
     const onSwipedRight = () => this.selectDayOnSwipe('prev');
@@ -56,12 +51,26 @@ class ClassList extends Component {
       </Swipeable>
     )
     return (
-      <div>
-        <Header title={this.props.headerTitle} />
-        <DayPicker
-          selectedDay={this.props.selectedDay}
-          onDaySelect={this.props.initClassList}
-        />
+      <div className="class-list">
+        <div className="header">
+          <div className="header-description">
+            <a
+              onClick={onHeaderPrevious(selectedDay)}
+              className="icon-horizontal-arrow previous week-picker"
+            />
+            { this.props.headerTitle }
+            <a
+              onClick={onHeaderNext(selectedDay)}
+              className="icon-horizontal-arrow week-picker"
+            />
+            <Link to="/"  className="menu icon-left-arrow" />
+          </div>
+          <h5 className="no-margin">{this.props.selectedDay}</h5>
+          <DayPicker
+            selectedDay={this.props.selectedDay}
+            onDaySelect={this.props.initClassList}
+          />
+        </div>
         { isLoading &&
           <div className="loading">
             <Loader type="bubbles" />
@@ -105,6 +114,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     initClassList: (startDate) => {
       dispatch(loadClasses(startDate));
       dispatch(push(`/classes?day=${startDate}`));
+    },
+    onHeaderPrevious: (startingDay) => () => {
+      const newDate = moment(startingDay)
+        .subtract(7, 'days').format('YYYY-MM-DD');
+      dispatch(loadClasses(newDate));
+      dispatch(push(`/classes?day=${newDate}`));
+    },
+    onHeaderNext: (startingDay) => () => {
+      const newDate = moment(startingDay)
+        .add(7, 'days').format('YYYY-MM-DD');
+      dispatch(loadClasses(newDate));
+      dispatch(push(`/classes?day=${newDate}`));
     }
   }
 };

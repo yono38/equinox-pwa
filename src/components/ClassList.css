@@ -1,0 +1,35 @@
+.previous:before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-flex;
+}
+
+.week-picker {
+  font-size: 8px;
+  padding: 0 5px;
+  color: white;
+  text-decoration: none;
+}
+.class-list .header {
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  background: black;
+  top: 0px;
+}
+.class-list .header-description {
+  padding: 20px;
+  padding-bottom: 0;
+}
+h5 {
+  font-weight: normal;
+}
+.week-picker:before {
+  height: 3px;
+}
+.class-tile-list {
+  margin-top: 118px;
+}

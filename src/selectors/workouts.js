@@ -16,3 +16,8 @@ export const getWorkouts = createSelector(
   [getWorkoutModuleState],
   (module) => module.get('workouts').toJS() || []
 );
+
+export const getRecentWorkout = createSelector(
+  [getWorkouts],
+  (workouts) => workouts.length > 1 ? workouts.slice(-1)[0] : {}
+);

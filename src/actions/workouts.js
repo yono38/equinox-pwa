@@ -7,6 +7,12 @@ import moment from 'moment';
 export const WORKOUTS_REQUEST = 'workouts/WORKOUTS_REQUEST'
 export const WORKOUTS_SUCCESS = 'workouts/WORKOUTS_SUCCESS'
 export const WORKOUTS_FAILURE = 'workouts/WORKOUTS_FAILURE'
+export const REMOVE_WORKOUT = 'workouts/REMOVE_WORKOUT';
+
+export const removeWorkout = (classId) => ({
+	type: REMOVE_WORKOUT,
+	classId
+});
 
 export const requestWorkouts = (month, year) => {
 	return {

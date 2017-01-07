@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 
 import {
+  REMOVE_WORKOUT,
   WORKOUTS_REQUEST,
   WORKOUTS_SUCCESS,
   WORKOUTS_FAILURE
@@ -32,6 +33,14 @@ export default function(state = initialState, action) {
         .set('isLoading', false)
         .set('isError', true);
     }
+
+    case REMOVE_WORKOUT: {
+      const filteredWorkouts = state
+        .get('workouts').toJS()
+        .filter((workout) => workout.classInstanceId !== action.classId);
+      return state.set('workouts', fromJS(filteredWorkouts));
+    }
+
     default:
       return state;
   }

@@ -18,6 +18,12 @@ class Login extends Component {
     this.props.onClickLogin(this.state, this.props.router.replace);
   }
 
+  loginOnEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.submitLogin();
+    }
+  }
+
   render() {
     const handleInput = refName =>
       event => this.setState({ [refName]: event.target.value });
@@ -46,6 +52,7 @@ class Login extends Component {
             type="password"
             value={this.state.password}
             onChange={handleInput('password')}
+            onKeyPress={this.loginOnEnter}
           />
           <button onClick={this.submitLogin} className="sign-in-button">
             Sign in to Equinox

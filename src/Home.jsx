@@ -5,6 +5,7 @@ import './Home.css';
 import { Link } from 'react-router';
 import CheckinSummary from './components/CheckinSummary';
 import ClassSummary from './components/ClassSummary';
+import ActivitySummary from './components/ActivitySummary';
 import HomeMenu from './components/HomeMenu';
 import { logout } from './actions/auth';
 
@@ -22,7 +23,7 @@ class Home extends Component {
           </div>
           <div className="Home-welcome">
             <div className="Home-welcome-text">
-              <h1 className="no-margin">Jason</h1>
+              <h1 className="no-margin">{this.props.firstName}</h1>
               <p className="text-small no-margin color-lightgrey">Welcome to Brookfield Place</p>
             </div>
             <div className="Home-checkin-wrHomeer">
@@ -51,19 +52,7 @@ class Home extends Component {
 
         <ClassSummary />
 
-        <div className="card">
-          <div className="card-header">
-            <h2 className="color-lightgrey">Recent Activity</h2>
-            <Link to="/activity" className="color-teal">
-              See All Activity{' '}
-              <span className="icon-horizontal-arrow" />
-            </Link>
-          </div>
-          <div className="card-body">
-            <h3>Vinyasa Yoga</h3>
-            <p className="color-grey">2 Days Ago</p>
-          </div>
-        </div>
+        <ActivitySummary />
 
         <CheckinSummary />
 
@@ -73,7 +62,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  const firstName = localStorage.getItem('name') || 'Welcome back';
+  return { firstName };
 }
 
 const mapDispatchToProps = (dispatch) => {

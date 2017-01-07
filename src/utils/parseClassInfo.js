@@ -1,8 +1,9 @@
 import moment from 'moment';
+import isEmpty from 'lodash/isEmpty';
 
-const parseClassInfo = (classItem) => {
+const parseClassInfo = (classItem = {}) => {
   let parsedClass = {};
-  if (classItem) {
+  if (classItem && !isEmpty(classItem)) {
     const instructor = classItem.instructors[0].instructor;
     const startTime = moment(classItem.startDate).format('h:mm A');
     const displayWeekday = moment(classItem.startDate).format('dddd');

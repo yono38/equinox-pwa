@@ -13,8 +13,8 @@ import parseClassInfo from '../utils/parseClassInfo';
 
 class ClassSummary extends Component {
   componentDidMount() {
-    const { isLoading, eventItem, initCalendar, isFromCache } = this.props;
-    if (!isLoading && (isEmpty(eventItem) || isFromCache)) {
+    const { isLoading, classItem, initCalendar, isFromCache } = this.props;
+    if (!isLoading && (isEmpty(classItem) || isFromCache)) {
       initCalendar();
     }
   }

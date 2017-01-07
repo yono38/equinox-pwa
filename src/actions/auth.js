@@ -17,7 +17,11 @@ export const login = (auth, replace = () => {}) => {
         }
       })
       // TODO figure out better security
-			.then(response => localStorage.setItem('auth', btoa(`${username}:${password}`)))
+			.then(response => response.json())
+      .then(response => {
+        localStorage.setItem('auth', btoa(`${username}:${password}`));
+        localStorage.setItem('name', response.firstName);
+      })
 			.then(() => dispatch({ type: LOGIN_SUCCESS }))
 			.then(() => replace('/'))
 			.catch(error => { console.log(error); dispatch({ type: LOGIN_FAILURE, error }) });
@@ -28,6 +32,7 @@ export const logout = (replace) => {
   return (dispatch, getState) => {
     dispatch({ type: LOGOUT });
     localStorage.removeItem('auth');
+    localStorage.removeItem('name');
     localStorage.removeItem('calEvents');
     replace('/login');
   }

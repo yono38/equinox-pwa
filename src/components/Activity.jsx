@@ -8,6 +8,7 @@ import {
   getIsLoading,
   getWorkouts
 } from '../selectors/workouts';
+import { removeFromCalendar } from '../actions/calendar';
 import { loadWorkouts } from '../actions/workouts';
 import Header from './Header';
 
@@ -22,19 +23,28 @@ class Activity extends Component {
   }
 
   render() {
-    const { isLoading, workouts } = this.props;
+    const { isLoading, workouts, removeActivity } = this.props;
     const monthName = moment().format('MMMM');
+    const removeOnClick = (classId) => () => {
+      const confirmation = confirm('Are you sure you want to remove this activity?');
+      if (confirmation) {
+        removeActivity(classId);
+      }
+    };
     const workoutsElem = workouts.map((workout) => {
       const totalDistance = workout.totalDistance ?
-          <p>{`${workout.totalDistance} MI`}</p> : null;
+          `${workout.totalDistance} MI` : ' ';
       return (<div className="card">
+        <button className="remove-activity" onClick={removeOnClick(workout.classInstanceId)}>
+          <span className="icon-close" />
+        </button>
         <p className="color-grey">
           {moment(workout.startDate).format('MMM D')}
         </p>
         <p><strong>{workout.name}</strong></p>
         <p>{workout.trainerName}</p>
         <p className="calories">{workout.totalCalories} Cal</p>
-        { totalDistance }
+        <p className="distance">{ totalDistance }</p>
       </div>);
     });
     const recentActivity = (
@@ -73,7 +83,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  initActivity: () => dispatch(loadWorkouts())
+  initActivity: () => dispatch(loadWorkouts({})),
+  removeActivity: (classId) => dispatch(removeFromCalendar(classId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Activity);
