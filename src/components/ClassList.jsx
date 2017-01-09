@@ -55,7 +55,7 @@ class ClassList extends Component {
           <div className="header-description">
             <a
               onClick={onHeaderPrevious(selectedDay)}
-              className="icon-horizontal-arrow previous week-picker"
+              className="icon-horizontal-arrow previous-icon week-picker"
             />
             { this.props.headerTitle }
             <a
