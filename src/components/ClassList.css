@@ -1,3 +1,7 @@
+.class-list {
+  height: 100%
+}
+
 .previous:before {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -12,6 +16,16 @@
   padding: 0 5px;
   color: white;
   text-decoration: none;
+}
+
+.class-list .loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.class-list .loading div {
+  margin: 0 auto;
 }
 .class-list .header {
   padding: 0;

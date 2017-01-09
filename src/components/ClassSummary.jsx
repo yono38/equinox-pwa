@@ -36,7 +36,7 @@ class ClassSummary extends Component {
         <div className="text-small">
           <span className="black-badge booked">Booked</span>
           {' '}
-          <strong>Bike #22</strong>
+          <strong>Bike #{classItem.status.localId}</strong>
         </div> : null;
       classBody = (
         <div className="Home-up-next-body card-body">
@@ -44,8 +44,7 @@ class ClassSummary extends Component {
           <p className="color-grey">
             {`${classItem.instructor.firstName} ${classItem.instructor.lastName}`}
           </p>
-          <p className="color-grey">{classItem.startTime} - {classItem.endTime}</p>
-          <p className="color-grey">{classItem.displayWeekday}</p>
+          <p className="color-grey">{classItem.displayWeekday} @ {classItem.startTime} - {classItem.endTime}</p>
           {bookedStatus}
         </div>
       );

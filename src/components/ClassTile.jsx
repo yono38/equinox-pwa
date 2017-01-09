@@ -5,6 +5,7 @@ import CalendarButton from './CalendarButton';
 
 const ClassTile = props => {
   const {
+    bikeId,
     classId,
     name,
     instructor,
@@ -33,6 +34,8 @@ const ClassTile = props => {
   const bookedBadge = hasReservation ?
     <div className="text-small">
       <span className="black-badge booked">Booked</span>
+      {' '}
+      <strong>Bike #{bikeId}</strong>
     </div> : null;
   const ctaBtn = (isBookable && isBookingOpen && !isOnCalendar) ?
       <BookingButton

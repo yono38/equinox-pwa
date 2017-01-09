@@ -51,6 +51,7 @@ const getClasses = createSelector(
 export const getMappedClasses = createSelector(
   [getClasses], (classItems) => classItems.map(
     classItem => ({
+        bikeId: classItem.status.localId,
         classId: classItem.id,
         instructor: classItem.instructor,
         displayTime: classItem.displayTime,

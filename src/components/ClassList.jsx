@@ -72,9 +72,12 @@ class ClassList extends Component {
           />
         </div>
         { isLoading &&
-          <div className="loading">
+          <Swipeable
+            onSwipedRight={onSwipedRight}
+            onSwipedLeft={onSwipedLeft}
+            className="loading">
             <Loader type="bubbles" />
-          </div>
+          </Swipeable>
         }
         { !isLoading && classList }
       </div>
