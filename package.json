@@ -14,6 +14,7 @@
     "lodash": "^4.17.2",
     "moment": "^2.15.2",
     "react": "^15.3.2",
+    "react-barcode": "^1.1.0",
     "react-dom": "^15.3.2",
     "react-loading": "0.0.9",
     "react-redux": "^4.4.5",

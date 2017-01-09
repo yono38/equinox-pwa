@@ -27,11 +27,11 @@ class Home extends Component {
               <p className="text-small no-margin color-lightgrey">Welcome to Brookfield Place</p>
             </div>
             <div className="Home-checkin-wrHomeer">
-              <a href="#" className="Home-checkin-button text-small">
-              <span className="icon-marker-dot" />
-              {' '}
-              Check In
-              </a>
+              <Link to="/checkin" className="Home-checkin-button text-small">
+                <span className="icon-marker-dot" />
+                {' '}
+                Check In
+              </Link>
             </div>
           </div>
           <div className="Home-actions">

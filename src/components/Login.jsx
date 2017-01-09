@@ -54,7 +54,7 @@ class Login extends Component {
             onChange={handleInput('password')}
             onKeyPress={this.loginOnEnter}
           />
-          <button onClick={this.submitLogin} className="sign-in-button">
+          <button onClick={this.submitLogin} className="submit-button sign-in-button">
             Sign in to Equinox
           </button>
         </div>

@@ -22,7 +22,6 @@ export default function(state = initialState, action) {
     }
 
     case WORKOUTS_SUCCESS: {
-      console.log('action', action)
       return state
         .set('workouts', fromJS(action.workouts))
         .set('isLoading', false);

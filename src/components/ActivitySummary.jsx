@@ -10,7 +10,6 @@ import {
   getRecentWorkout,
 } from '../selectors/workouts';
 import { loadWorkouts } from '../actions/workouts';
-import parseClassInfo from '../utils/parseClassInfo';
 
 class ActivitySummary extends Component {
   componentDidMount() {
@@ -65,7 +64,8 @@ class ActivitySummary extends Component {
 
 ActivitySummary.propTypes = {
   classItem: PropTypes.object,
-  isLoading: PropTypes.bool
+  initWorkouts: PropTypes.func,
+  isLoading: PropTypes.bool,
 }
 
 const mapStateToProps = (state, ownProps) => ({

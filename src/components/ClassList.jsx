@@ -28,7 +28,6 @@ class ClassList extends Component {
   }
 
   selectDayOnSwipe(direction) {
-    const selectedDayIdx = moment(this.props.selectedDay).day();
     const momentOperation = direction ===  'prev' ? 'subtract' : 'add';
     const newSelectedDay = moment(this.props.selectedDay)[momentOperation](1, 'day')
       .format('YYYY-MM-DD');

@@ -29,25 +29,6 @@
   text-align: center;
 }
 
-.login-page input, .login-page .sign-in-button {
-  width: 100%;
-  margin-top: 5px;
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #fff;
-  font-size: 12px;
-  height: 44px;
-  letter-spacing: 1.5px;
-}
-
-.login-page .sign-in-button {
-  background: white;
-  color: black;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-top: 20px;
-}
-
 .login-page ::-webkit-input-placeholder {
    text-align: center;
 }

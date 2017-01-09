@@ -15,6 +15,7 @@ import Login from './components/Login';
 import Calendar from './components/Calendar';
 import Activity from './components/Activity';
 import Settings from './components/Settings';
+import CheckinCode from './components/CheckinCode';
 import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -47,6 +48,7 @@ render((
       <Route path="/calendar" component={Calendar} onEnter={requireAuth} />
       <Route path="/activity" component={Activity} onEnter={requireAuth} />
       <Route path="/settings" component={Settings} onEnter={requireAuth} />
+      <Route path="/checkin" component={CheckinCode} onEnter={requireAuth} />
     </Router>
   </Provider>
 ), document.getElementById('root'))
