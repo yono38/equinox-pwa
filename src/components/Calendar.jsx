@@ -42,7 +42,7 @@ class Calendar extends Component {
       return (
         <div key={`day-${day}`} className="day-container">
           <div className="day-label">
-            {moment().isoWeekday(day).format('dd')}
+            {moment().weekday(day).format('dd')}
           </div>
           <div className="event-container">
             {eventInfoElem}

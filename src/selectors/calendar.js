@@ -34,14 +34,14 @@ export const getEventsByIsoWeekday = createSelector(
     keyBy(
       // Object.values not yet fully supported
       values(events),
-      (ev) => moment(ev.startDate).isoWeekday()
+      (ev) => moment(ev.startDate).weekday()
     ) || []
 );
 
 export const getUpcomingEvent = createSelector(
   [getEventsByIsoWeekday],
   (eventsByDay) => {
-    const isoToday = moment().isoWeekday();
+    const isoToday = moment().weekday();
     for (let i = isoToday; i < 6; i++) {
       if (eventsByDay[i]) {
         return eventsByDay[i];

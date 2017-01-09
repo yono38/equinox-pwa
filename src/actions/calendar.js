@@ -29,8 +29,8 @@ export const processError = (error) => ({
 });
 
 export const loadCalendar = (
-	fromDate = moment().isoWeekday(0).format('YYYY-MM-DD'),
-	toDate = moment().isoWeekday(6).format('YYYY-MM-DD')
+	fromDate = moment().weekday(0).format('YYYY-MM-DD'),
+	toDate = moment().weekday(6).format('YYYY-MM-DD')
 ) => {
 	return (dispatch, getState) => {
 		// Set new date before loading state info
