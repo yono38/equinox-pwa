@@ -18,17 +18,20 @@ input, .submit-button {
   width: 100%;
   margin-top: 5px;
   border-color: rgba(255, 255, 255, 0.5);
-  color: black;
   height: 44px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2.5px;
 }
 
 input {
   font-size: 20px;
+  background: transparent;
+  color: white;
+  text-align: center;
 }
 
 .submit-button {
   background: white;
+  color: black;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;

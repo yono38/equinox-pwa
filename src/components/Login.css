@@ -24,11 +24,6 @@
   padding: 0 10px;
 }
 
-.login-page input {
-  background: transparent;
-  text-align: center;
-}
-
 .login-page ::-webkit-input-placeholder {
    text-align: center;
 }

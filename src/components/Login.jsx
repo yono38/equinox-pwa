@@ -15,7 +15,12 @@ class Login extends Component {
   }
 
   submitLogin = () => {
-    this.props.onClickLogin(this.state, this.props.router.replace);
+    const { username, password } = this.state;
+    const cleanedAuth = {
+      username: username.trim(),
+      password: password.trim()
+    };
+    this.props.onClickLogin(cleanedAuth, this.props.router.replace);
   }
 
   loginOnEnter = (e) => {
@@ -64,17 +69,13 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onClickLogin: PropTypes.fun
+  onClickLogin: PropTypes.func
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {};
-}
+const mapStateToProps = (state, ownProps) => ({});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onClickLogin: (auth, replace) => dispatch(login(auth, replace))
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  onClickLogin: (auth, replace) => dispatch(login(auth, replace))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
